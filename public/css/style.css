@@ -1,0 +1,31 @@
+button.navbar-toggler {
+    position: fixed;
+    right: 0;
+    margin: 10px;
+  }
+  
+  nav.navbar.navbar-expand-lg.bg-light{
+   height: 140px;
+  }
+  
+  form {
+    max-width: 300px;
+    margin: 22px;
+    display: flex;
+    flex-direction: column;
+    input {
+      margin-bottom: 12px;
+    }
+    button {
+      margin-top: 16px;
+    }
+  }
+  
+  header {
+    margin-bottom: 12px;
+  }
+  
+  h1,h2,h3,h4,h5 {
+    margin-left: 22px;
+    margin-right: 22px;
+  }
