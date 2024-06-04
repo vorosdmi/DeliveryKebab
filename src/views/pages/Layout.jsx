@@ -1,7 +1,8 @@
 const React = require('react');
 
 //* условная верстка для navBar
-module.exports = function Layout({ children, login }) {
+module.exports = function Layout({ children, number, user }) {
+  console.log(user);
   return (
     <html lang="en">
       <head>
@@ -21,12 +22,12 @@ module.exports = function Layout({ children, login }) {
       <header>
 
 
-        {login ? (
+        {number ? (
           <nav className="navbar navbar-expand-lg bg-light">
             <div className="container-fluid">
-              <a className="navbar-brand" href="/">
-                Home
-              </a>
+              <span className="navbar-brand" href="/">
+              Hello, {number}
+              </span>
               <button
                 className="navbar-toggler"
                 type="button"
@@ -41,7 +42,10 @@ module.exports = function Layout({ children, login }) {
               <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
                   <li className="nav-item">
-                    <div className="nav-link">{login}</div>
+                  <a className="nav-link" href="/">
+                  Home
+                    </a>
+              
                   </li>
                   <li className="nav-item">
                     <a className="nav-link" href="/logout">

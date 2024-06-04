@@ -40,13 +40,13 @@ app.use(session(sessionConfig));
 
 app.use('/login', secureRoute, loginRouter);
 app.use('/register', secureRoute, regRouter);
-app.use('/', checkUser, indexRouter);
+app.use('/', indexRouter);
 app.use('/orders', orderRouter);
 
-app.get('/*', (req, res) => {
-  // res.status(404).send('404');
-  res.redirect('/');
-});
+// app.get('/*', (req, res) => {
+//   // res.status(404).send('404');
+//   res.redirect('/');
+// });
 
 app.listen(PORT, () => {
   console.log(`Сервак крутится на порту ${PORT}!`);

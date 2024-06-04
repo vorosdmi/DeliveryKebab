@@ -1,5 +1,5 @@
 function checkUser(req, res, next) {
-    if (req.session.login) {
+    if (req.session.number) {
       next();
     } else {
       res.redirect('/login');
@@ -7,7 +7,7 @@ function checkUser(req, res, next) {
   }
   
   function secureRoute(req, res, next) {
-    if (!req.session.login) {
+    if (!req.session.number) {
       next();
     } else {
       res.redirect('/');

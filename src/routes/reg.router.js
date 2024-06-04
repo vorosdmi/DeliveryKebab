@@ -12,19 +12,20 @@ regRouter.get('/', (req, res) => {
 
 regRouter.post('/', async (req, res) => {
   try {
-    const { login, password } = req.body;
-    const user = await User.findOne({ where: { login } });
+    const { name, password, number } = req.body;
+    //! здесь можно написать регулярку для номера тел
+    const user = await User.findOne({ where: { number } });
     if (user) {
-      console.log(`User with login ${login} already exists`);
-      res.json({ regErr: `User with login ${login} already exists` }); // для fetch-a
+      console.log(`User with number phone ${number} already exists`);
+      res.json({ regErr: `User number phone ${number} already exists` }); // для fetch-a
     } else {
       //! bcrypt hash
       const hash = await bcrypt.hash(password, 10);
-      const newUser = await User.create({ login, password: hash });
-      req.session.login = newUser.login; // или EMAIL или MAIL
-      req.session.userId = newUser.id; // или EMAIL или MAIL
+      const newUser = await User.create({ name, password: hash, number });
+      req.session.number = newUser.number; // или EMAIL или MAIL
+      req.session.userId = newUser.id; 
       req.session.save(() => {
-        res.json({ regDone: `Registration succes ${login}` }); // для fetch-a
+        res.json({ regDone: `Registration succes ${number}` }); // для fetch-a
         // res.redirect('/');
       });
     }

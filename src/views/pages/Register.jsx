@@ -4,18 +4,24 @@ const Layout = require('./Layout');
 
 module.exports = function Register() {
   return (
+   
     <Layout>
-      <h2>Reg pls</h2>
+      <h3>Добро пожаловать!  <br />Давайте зарегистрируемся</h3>
       <hr />
       <form action="/register" method="POST" id="regForm">
         <label htmlFor="exampleInput1" className="form-label">
-          Login
+         Name
         </label>
-        <input name="login" type="text" className="form-control shadow rounded" id="exampleInput1" />
+        <input name="name" type="text" className="form-control shadow rounded" id="exampleInput1" />
+        <label htmlFor="exampleInput2" className="form-label">
+          Phone number
+        </label>
+        <input name="number" type="text"  className="form-control shadow rounded" id="exampleInput2" />
         <label htmlFor="exampleInput2" className="form-label">
           Password
         </label>
-        <input name="password" type="password" className="form-control shadow rounded" id="exampleInput2" />
+        <input name="password" type="password" className="form-control shadow rounded" id="exampleInput3" />
+        
         <button type="submit" className="btn btn-primary shadow rounded">
           Registration
         </button>
