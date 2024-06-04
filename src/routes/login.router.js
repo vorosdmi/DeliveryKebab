@@ -50,7 +50,8 @@ loginRouter.post('/', async (req, res) => {
     } else {
       const checkPass = await bcrypt.compare(password, user.password);
       if (checkPass) {
-        req.session.number = user.number;    //! or email
+        req.session.number = user.number; 
+        req.session.userId = user.id;
         req.session.save(() => {
           //const { id } = user
           console.log('Password correct. Session saved');

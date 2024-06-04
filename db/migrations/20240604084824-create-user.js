@@ -15,7 +15,7 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
-      curier: {
+      isCourier: {
         type: Sequelize.BOOLEAN
       },
       number: {

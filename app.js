@@ -14,7 +14,8 @@ const indexRouter = require('./src/routes/index.router');
 const loginRouter = require('./src/routes/login.router');
 const regRouter = require('./src/routes/reg.router');
 
-const { checkUser, secureRoute } = require('./src/middlewares/common')
+const { checkUser, secureRoute } = require('./src/middlewares/common');
+const orderRouter = require('./src/routes/order.router');
 
 const app = express();
 const { PORT } = process.env;
@@ -40,8 +41,7 @@ app.use(session(sessionConfig));
 app.use('/login', secureRoute, loginRouter);
 app.use('/register', secureRoute, regRouter);
 app.use('/', indexRouter);
-
-
+app.use('/orders', orderRouter);
 
 // app.get('/*', (req, res) => {
 //   // res.status(404).send('404');
