@@ -22,6 +22,7 @@ regRouter.post('/', async (req, res) => {
       const hash = await bcrypt.hash(password, 10);
       const newUser = await User.create({ login, password: hash });
       req.session.login = newUser.login; // или EMAIL или MAIL
+      req.session.userId = newUser.id; // или EMAIL или MAIL
       req.session.save(() => {
         res.json({ regDone: `Registration succes ${login}` }); // для fetch-a
         // res.redirect('/');

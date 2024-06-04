@@ -15,16 +15,13 @@ module.exports = {
       url: {
         type: Sequelize.STRING
       },
-      firstprice: {
+      price: {
         type: Sequelize.INTEGER
       },
-      skidka: {
+      discount: {
         type: Sequelize.INTEGER
       },
-      place: {
-        type: Sequelize.STRING
-      },
-      userId: {
+      clientId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Users',
@@ -32,6 +29,9 @@ module.exports = {
         },
         onDelete: 'cascade',
         allowNull: false,
+      },
+      clientAddress: {
+        type: Sequelize.STRING
       },
       curierId: {
         type: Sequelize.INTEGER,
@@ -41,6 +41,12 @@ module.exports = {
         },
         onDelete: 'cascade',
         allowNull: false,
+      },
+      courierAddress: {
+        type: Sequelize.STRING
+      },
+      isAccepted: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
