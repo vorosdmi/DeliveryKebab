@@ -29,3 +29,9 @@ button.navbar-toggler {
     margin-left: 22px;
     margin-right: 22px;
   }
+
+  .map {
+    border: 2px solid purple;
+    width: 300px;
+    height: 150px;
+  }
