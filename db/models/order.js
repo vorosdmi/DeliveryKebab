@@ -10,18 +10,20 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.User, { foreignKey: 'userId' });
-      this.belongsTo(models.User, { foreignKey: 'curierId' });
+      this.belongsTo(models.User, { as: 'Client', foreignKey: 'clientId' });
+      this.belongsTo(models.User, { as: 'Courier', foreignKey: 'courierId' });
     }
   }
   Order.init({
     name: DataTypes.STRING,
     url: DataTypes.STRING,
-    firstprice: DataTypes.INTEGER,
-    skidka: DataTypes.INTEGER,
-    place: DataTypes.STRING,
-    userId: DataTypes.INTEGER,
-    curierId: DataTypes.INTEGER
+    price: DataTypes.INTEGER,
+    discount: DataTypes.INTEGER,
+    courierId: DataTypes.INTEGER,
+    courierAddress: DataTypes.STRING,
+    clientId: DataTypes.INTEGER,
+    clientAddress: DataTypes.STRING,
+    isAccepted: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Order',
