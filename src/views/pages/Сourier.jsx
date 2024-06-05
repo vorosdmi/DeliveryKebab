@@ -1,5 +1,5 @@
 const React = require('react');
-const Layout = require('../Layout');
+const Layout = require('./Layout');
 
 module.exports = function Courier({ login, orders }) {
   return(
