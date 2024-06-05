@@ -101,7 +101,6 @@ nav.navbar.navbar-expand-lg.bg-light {
   gap: 20px;
 }
 
-
 .card {
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -121,8 +120,9 @@ nav.navbar.navbar-expand-lg.bg-light {
   margin-bottom: 16px;
 }
 .card-text {
-  font-size: 16px;
+  font-size: 13px;
   margin-bottom: 16px;
+  line-height: 20px;
 }
 .btn-add {
   display: inline-block;
@@ -202,4 +202,9 @@ nav.navbar.navbar-expand-lg.bg-light {
 .mainContainerCart {
   padding-left: 30px;
   margin-top: 20px;
+}
+
+.card-title {
+  font-size: 20px;
+  text-align: center;
 }
