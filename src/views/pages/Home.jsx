@@ -3,10 +3,13 @@ const Layout = require("./Layout");
 const Card = require("../components/Card");
 
 module.exports = function Home({ number, userName, userId, orders }) {
-  console.log(orders);
+ //? имеющиеся адреса для меток
+  const courierAddresses = orders.map(order => order.courierAddress+';');
+  console.log('!!!!', courierAddresses);
+
   return (
     <Layout number={number} userName={userName} userId={userId}>
-      <div className="containerMap">
+      <div className="containerMap" data-addresses={courierAddresses}>
         <h4>Добро пожаловать в Деливери кебаб!</h4>
         <h6>
           Здесь вы можете выбрать и оформить себе заказ из указанного списка
@@ -25,16 +28,19 @@ module.exports = function Home({ number, userName, userId, orders }) {
       <div className="containerAll">
         {orders.map((order) => (
           <div className="card" key={order.id}>
-            <h5 className="card-title">{order.name}</h5>
+            <div className="card-title">{order.name}</div>
 
-            <h6 className="card-text">Исходная цена: {order.price}p.</h6>
-            <h6 className="card-text">
+            <div className="card-text">Исходная цена: {order.price}p.</div>
+            <div className="card-text">
               Цена со скидкой:{" "}
               {Number(order.price) -
                 (Number(order.price) * Number(order.discount)) / 100}
-            </h6>
-            <h6 className="card-text">Расстояние до вас: ?????</h6>
-            <h6 className="card-text">Местоположение: {order.courierAddress}</h6>
+            </div>
+            <div className="card-text">Расстояние до вас: ?????</div>
+            <div className="card-text">
+              {" "}
+              📍 {order.courierAddress}
+            </div>
             <img
               src={order.url}
               className="card-img-topp"
