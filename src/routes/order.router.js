@@ -3,7 +3,7 @@ const { Order } = require('../../db/models');
 const Courier= require('../views/pages/Сourier');
 
 // 1. Ручка get('/courier') - все заказы курьера
-indexRouter.get("/courier", async (req, res) => {
+orderRouter.get("/courier", async (req, res) => {
   const { login, userId } = req.session;
   try {
     const orders = await Order.findAll({
