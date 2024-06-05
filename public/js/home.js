@@ -1,6 +1,7 @@
 const container = document.querySelector(".containerAll");
 
 //! геолокация
+const ymaps = window.ymaps;
 
 function getLocation() {
   if ("geolocation" in navigator) {
@@ -19,7 +20,7 @@ function getLocation() {
           // Добавьте другие адреса по вашему выбору
         ];
 
-
+console.log(ymaps);
         // Создаем карту и добавляем метку
         ymaps.ready(function () {
           const myMap = new ymaps.Map("mymap", {
@@ -36,6 +37,10 @@ function getLocation() {
           );
 
           myMap.geoObjects.add(myPlacemark);
+
+
+
+
 
          
 // Добавляем метки на карту по адресам
@@ -143,3 +148,6 @@ container.addEventListener("click", async (e) => {
     }
   }
 });
+
+
+

@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     courierAddress: DataTypes.STRING,
     clientId: DataTypes.INTEGER,
     clientAddress: DataTypes.STRING,
-    isAccepted: DataTypes.BOOLEAN
+    isAccepted: DataTypes.BOOLEAN,
+    isReady: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Order',
