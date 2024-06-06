@@ -1,6 +1,6 @@
 body {
   font-family: 'Comfortaa', sans-serif;
-  padding-top: 60px;
+  margin-top: 80px;
 }
 
 button.navbar-toggler {
@@ -8,15 +8,6 @@ button.navbar-toggler {
   right: 0;
   margin: 10px;
 }
-
-body {
-  background-color: #9a8db5;
-}
-
-/* nav.navbar.navbar-expand-lg.bg-light {
-  height: 140px;
-  background-color: blueviolet;
-} */
 
 .custom-navbar {
   background-color: #b1afb6;
@@ -27,34 +18,30 @@ form {
   margin: 22px;
   display: flex;
   flex-direction: column;
+}
 
-  input {
-    margin-bottom: 12px;
-  }
-  button {
-    margin-top: 16px;
-  }
+form input {
+  margin-bottom: 12px;
+}
+
+form button {
+  margin-top: 16px;
 }
 
 header {
   margin-bottom: 12px;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5 {
+h1, h2, h3, h4, h5 {
   margin-left: 22px;
   margin-right: 22px;
 }
 
-.map {
+/* .map {
   border: 2px solid purple;
   width: 600px;
   height: 300px;
-  /* flex-grow: 1; Карта занимает все доступное место */
-}
+} */
 
 .elementHiddn {
   display: none;
@@ -71,32 +58,26 @@ nav.navbar.navbar-expand-lg.bg-light {
 .containerMap {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Выравнивание по вертикали (если необходимо) */
-  align-items: center; /* Выравнивание по горизонтали */
-  text-align: center; /* Центрирование текста внутри элементов */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   margin: 40px 40px 40px 0;
-  gap: 20px;
 }
 
-.containerMinMap {
+/* .containerMinMap {
   display: flex;
-  align-items: center; /* Вертикальное выравнивание */
-  justify-content: flex-start; /* Горизонтальное распределение */
+  align-items: center;
+  justify-content: flex-start;
   margin: 50px 100px;
   gap: 100px;
-}
+} */
 
-.text-map {
-  align-self: center; /* Выравнивание текста по вертикали */
-  padding: 20px; /* Отступы вокруг текста */
-  max-width: 300px; /* Максимальная ширина текста */
-  text-align: center;
-}
 
-.containerAll {
+
+/* .containerAll {
   display: flex;
   flex-wrap: wrap;
-}
+} */
 
 .containerAllCart {
   display: flex;
@@ -118,34 +99,44 @@ nav.navbar.navbar-expand-lg.bg-light {
 }
 
 .card {
+  display: flex;
+  flex-direction: row; /* Горизонтальное расположение элементов */
+  align-items: center;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 16px;
-  width: 250px;
-  margin: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #e1e1e2;
+  /* border-radius: 8px; */
+  /* padding: 16px; */
+  /* width: 700px; */
+  /* height: 150px; */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  /* margin: 20px; */
+  background-color: #fff;
 }
 
-.containerMinCart {
+.card-img-topp {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 16px;
+}
+
+.card-content {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  flex: 1; /* Заставляет card-content занимать все оставшееся пространство */
 }
 
 .card-title {
-  font-size: 17px;
+  font-size: 20px;
+  font-weight: bold;
   margin-bottom: 8px;
 }
+
 .card-text {
   font-size: 13px;
-  margin-bottom: 5px;
-  line-height: 18px;
-}
-
-.card-textCart {
-  font-size: 15px;
-  margin-bottom: 10px;
-  line-height: 18px;
+  line-height: 20px;
 }
 
 .btn-add {
@@ -153,7 +144,7 @@ nav.navbar.navbar-expand-lg.bg-light {
   padding: 10px 20px;
   font-size: 11px;
   color: #fff;
-  background-color: #373756;
+  background-color: #007bff;
   border: none;
   border-radius: 4px;
   text-decoration: none;
@@ -161,40 +152,43 @@ nav.navbar.navbar-expand-lg.bg-light {
   margin-top: 5px;
 }
 
+.elementHiddn {
+  display: none;
+}
+
+.btn-add:hover {
+  color: #fff;
+  background-color: #0056b3;
+}
+
 .placeOrder {
-  background-color: purple; /* Зеленый цвет фона */
-  color: #fff; /* Белый цвет текста */
-  border: none; /* Убираем границу */
-  border-radius: 8px; /* Скругленные углы */
-  padding: 7px 15px; /* Внутренние отступы */
-  font-size: 12px; /* Размер шрифта */
-  font-weight: bold; /* Жирный текст */
-  text-align: center; /* Центрирование текста */
-  cursor: pointer; /* Курсор в виде руки при наведении */
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Плавный переход для фона и трансформации */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень */
+  background-color: purple;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 15px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 30px;
 }
 
 .placeOrder:hover {
-  background-color: rgb(
-    156,
-    19,
-    156
-  ); /* Темно-зеленый цвет фона при наведении */
-  transform: translateY(-2px); /* Легкий подъем кнопки при наведении */
+  background-color: rgb(156, 19, 156);
+  transform: translateY(-2px);
 }
 
 .placeOrder:active {
-  background-color: rgb(97, 13, 97); /* Еще темнее при клике */
-  transform: translateY(
-    0
-  ); /* Кнопка возвращается в исходное положение при клике */
+  background-color: rgb(97, 13, 97);
+  transform: translateY(0);
 }
 
 .placeOrder:focus {
-  outline: none; /* Убираем обводку */
-  box-shadow: 0 0 0 3px rgb(88, 1, 88); /* Добавляем фокусное кольцо */
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(88, 1, 88);
 }
 
 .allCost {
@@ -203,24 +197,24 @@ nav.navbar.navbar-expand-lg.bg-light {
 }
 
 .priceValue {
-  font-weight: bold; /* Делаем текст жирным */
+  font-weight: bold;
 }
 
 .btn-del {
   display: inline-block;
-  width: 20px; /* Ширина кнопки */
-  height: 20px; /* Высота кнопки */
-  border-radius: 50%; /* Радиус скругления, чтобы сделать кнопку круглой */
-  background-color: #ccc; /* Цвет фона - светло-серый */
-  color: #fff; /* Цвет текста - белый */
-  text-align: center; /* Выравнивание текста по центру */
-  line-height: 20px; /* Центрирование текста по вертикали */
-  font-size: 13px; /* Размер шрифта */
-  text-decoration: none; /* Убираем подчеркивание */
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #ccc;
+  color: #fff;
+  text-align: center;
+  line-height: 20px;
+  font-size: 13px;
+  text-decoration: none;
 }
 
 .btn-del:hover {
-  background-color: #999; /* Изменяем цвет фона при наведении */
+  background-color: #999;
   color: white;
 }
 
@@ -232,12 +226,6 @@ nav.navbar.navbar-expand-lg.bg-light {
 
 .elem2 {
   padding-left: 130px;
-  /* padding-top: 100px;  */
-}
-
-.card-title {
-  font-size: 20px;
-  text-align: center;
 }
 
 .card-titleCart {
@@ -272,15 +260,10 @@ nav.navbar.navbar-expand-lg.bg-light {
   display: flex;
 }
 
-  /* .clientOrdersContainer,
-  .courierOrdersContainer {
-    width: 49%;
-  } */
-
-  .courier-floating-container,
-  .client-floating-container {
-    width: 49%;
-  }
+.courier-floating-container,
+.client-floating-container {
+  width: 49%;
+}
 
 .order-container {
   position: relative;
@@ -325,19 +308,20 @@ nav.navbar.navbar-expand-lg.bg-light {
   margin-top: 10px;
   width: 100%;
 }
+
 .contPage {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh; /* Высота равная высоте видимой области браузера */
+  height: 80vh;
 }
 
 .contReg {
-  width: 400px; /* Ширина контейнера с формой регистрации */
-  padding: 20px; /* Отступы вокруг контейнера */
-  border: 1px solid #ccc; /* Граница контейнера */
-  border-radius: 10px; /* Закругление углов контейнера */
-  background-color: #fff; /* Фоновый цвет контейнера */
+  width: 400px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
 }
 
 h3 {
@@ -368,27 +352,65 @@ button {
   margin-top: 10px;
 }
 
-.btn-add:hover {
-  color: #999;
-}
-/* 
-.name {
+#mainTitle {
   font-weight: bold;
+  /* color: white; */
+}
+
+.original-price {
+  text-decoration: line-through;
+  margin-right: 8px;
+  color: #888;
+  font-weight: bold;
+}
+
+.discounted-price {
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 8px;
+  color: #d9534f;
+}
+
+.discount-percentage {
+  font-size: 14px;
+  font-weight: bold;
+  color: #d9534f;
+}
+
+.containerMinMap {
+  display: flex;
+  flex-direction: row;
+}
+
+.map {
+  width: 60%; /* Растягиваем карту на всю доступную ширину */
+  margin-right: 20px; /* Добавляем небольшое расстояние между картой и карточками */
+  /* height: 400px; */
+  height: 70vh;
+}
+
+/* .containerAll {
+  width: 30%;
 } */
 
-.text_cart {
-  color: purple;
-  font-weight: bold;
+.card {
+  width: 100%; /* Занимает 100% ширины контейнера */
 }
 
+.card-img-topp {
+  width: 30%; /* Устанавливаем ширину изображения карточки */
+}
 
-.floating-container,
-.courier-floating-container,
-.client-floating-container {
-  background-color: #fff; /* Цвет фона */
-  border: 1px solid #ccc; /* Граница */
-  border-radius: 8px; /* Скругление углов */
-  padding: 10px; /* Внутренние отступы */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  margin: 0 20px; /* Отступы слева и справа */
+.card-content {
+  width: 60%; /* Устанавливаем ширину контента карточки */
+}
+
+.card {
+  /* Ваши текущие стили */
+  margin-bottom: 20px; /* Добавляем отступ снизу каждой карточки */
+}
+
+.containerAll {
+  height: 70vh;
+  overflow-y: auto; /* Добавляем вертикальную прокрутку */
 }

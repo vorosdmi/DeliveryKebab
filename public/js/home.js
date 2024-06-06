@@ -5,17 +5,15 @@ const addresses = addressesArr.split(";");
 addresses.pop();
 const userId = elementAddresses.dataset.userid;
 const number = elementAddresses.dataset.number;
-const ordersCarts = elementAddresses.dataset.ordercards
-let CARTS = JSON.parse(ordersCarts).length
+if (number) {
+  const ordersCarts = elementAddresses.dataset.ordercards; 
+  let CARTS = JSON.parse(ordersCarts).length;
+}
 const cartNav = document.querySelector('.cartNav')
 
 const allOrders = container.dataset.allorders;
 const allOrdersRes = JSON.parse(allOrders);
-//allOrdersRes.shift();
 console.log(1, allOrdersRes);
-//console.log(2, allOrdersRes[0].courierAddress);
-//console.log(3, allOrdersRes[0].clientAddress);
-//console.log('addressesArr', JSON.parse(addressesArr));
 
 //! геолокация
 const ymaps = window.ymaps;
@@ -37,32 +35,6 @@ function getLocation() {
             //controls: ["routePanelControl"],
           });
 
-          //????????
-          // for (let i=0; i<allOrdersRes.length; i++) {
-
-          //   let route = ymaps
-          //   .route([
-          //     [latitude, longitude],
-          //     {
-          //       type: "viaPoint",
-          //       point: [latitude, longitude],
-          //     },
-          //     allOrdersRes[i].courierAddress,
-          //   ])
-          //   .then(
-          //     function (route) {
-          //       // myMap.geoObjects.add(route)
-          // //! сохраняем в датасет расстояние
-          //       const routeLength = route.getLength() / 1000;
-          //       allOrdersRes[i].distance =  routeLength.toFixed(2)
-          //     },
-          //     function (error) {
-          //       console.log(error);
-          //     }
-          //   );
-
-          // }
-          //??????????????
           const calculateDistances = async () => {
             // Создаем массив промисов
             const promises = allOrdersRes.map((order, i) => {
@@ -100,40 +72,35 @@ function getLocation() {
             const resultContainer = allOrdersRes.map(
               (order) =>
                 `<div class="card" key=${order.id}>
-  <div class="card-title">${order.name}</div>
-
-  <div class="card-text">Исходная цена: ${order.price}p.</div>
-  <div class="card-text">
-    Цена со скидкой:
-    ${
-      Number(order.price) - (Number(order.price) * Number(order.discount)) / 100
-    }
-  </div>
-  <div class="card-text">Расстояние до вас: ${order.distance}км.</div>
-  <div class="card-text">
-    
-    📍 ${order.courierAddress}
-  </div>
-  <img
-    src=${order.url}
-    class="card-img-topp"
-    alt="food"
-    width="217"
-    height="200"
-  />
-  <a
-    
-    class=${number ? "btn-add" : "elementHiddn"}
-    data-location=""
-    data-odrerlocation=""
-    data-courierlocation=${order.courierAddress}
-    data-orderid=${order.id}
-    data-userid=${userId}
-  >
-    добавить в корзину
-  </a>
-</div>`
-            );
+              <img
+                src=${order.url}
+                class="card-img-topp"
+                alt="food"
+                width="150"
+                height="150"
+              />
+              <div class="card-content">
+                <div class="card-title">${order.name}</div>
+                <div class="card-text">
+                <span class="discounted-price">${Number(order.price) - (Number(order.price) * Number(order.discount)) / 100}p.</span>
+                  <span class="original-price">${order.price}p.</span>
+                  <span class="discount-percentage">(-${order.discount}%)</span>
+                </div>
+                <div class="card-text">Расстояние до вас: ${order.distance}км.</div>
+                <div class="card-text">${order.courierAddress}</div>
+                <a
+                  class=${number ? "btn-add" : "elementHiddn"}
+                  data-location=""
+                  data-odrerlocation=""
+                  data-courierlocation=${order.courierAddress}
+                  data-orderid=${order.id}
+                  data-userid=${userId}
+                >
+                  добавить в корзину
+                </a>
+              </div>
+            </div>`
+                );
 
             container.innerHTML = resultContainer.join(" ");
 
@@ -142,62 +109,6 @@ function getLocation() {
 
           // Вызов функции для расчета расстояний
           calculateDistances();
-
-          //           //************* */
-          // const newArr = [];
-          // for (let i = 0; i < addresses.length; i++) {
-          //   let route = ymaps
-          //     .route([
-          //       [latitude, longitude],
-          //       {
-          //         type: "viaPoint",
-          //         point: [latitude, longitude],
-          //       },
-          //       addresses[i],
-          //     ])
-          //     .then(
-          //       function (route) {
-          //         // myMap.geoObjects.add(route)
-
-          //         const routeLength = route.getLength() / 1000;
-          //         newArr.push(`${addresses[i]}, ${routeLength}`);
-          //       },
-          //       function (error) {
-          //         console.log(error);
-          //       }
-          //     );
-          // }
-          // console.log(newArr);
-          // //******************************* */
-
-          // addresses.forEach(el=>{
-          // console.log(el);
-          //   let control = myMap.controls.get("routePanelControl");
-          //   control.routePanel.state.set({
-          //     type: "masstransit",
-          //     fromEnabled: false,
-          //     from: `тюмень, 70 лет октября 26, `,
-          //     toEnabled: true,
-          //     to: `${el}`
-          //   });
-
-          //   control.routePanel.getRouteAsync().then(function (route) {
-          //     route.model.events.add('requestsuccess', function () {
-          //       var activeRoute = route.getActiveRoute();
-          //       if (activeRoute) {
-          //         var distance = activeRoute.properties.get("distance").value;
-          //         var distanceText = activeRoute.properties.get("distance").text;
-          //         console.log(`Расстояние: ${distance} метров`);
-          //         console.log(`Расстояние (текст): ${distanceText}`);
-          //       } else {
-          //         console.error("Маршрут не найден");
-          //       }
-          //     });
-          //   }).catch(function (error) {
-          //     console.error("Ошибка при построении маршрута:", error);
-          //   });
-
-          // })
 
           //! Добавляем my метку на карту
           const myPlacemark = new ymaps.Placemark(
@@ -322,52 +233,3 @@ container.addEventListener("click", async (e) => {
     }
   }
 });
-
-// ymaps.ready(init);
-
-// function init(pointA, pointB) {
-//   function addPlacemarkByAddressTwo(address) {
-//     return ymaps
-//       .geocode(address)
-//       .then(function (res) {
-//         const firstGeoObject = res.geoObjects.get(0);
-//         if (firstGeoObject) {
-//           const coordinates = firstGeoObject.geometry.getCoordinates();
-//           return {
-//             latitude: coordinates[0],
-//             longitude: coordinates[1],
-//           };
-//         } else {
-//           throw new Error("Адрес не найден");
-//         }
-//       })
-//       .catch(function (error) {
-//         console.error("Ошибка при геокодировании адреса:", error);
-//         throw error;
-//       });
-//   }
-
-// //Использование функции
-// addPlacemarkByAddressTwo("город Тюмень, улица 50 лет октября, дом 1")
-//   .then((coords) => {
-//     console.log(
-//       `Широта: 50лет ${coords.latitude}, Долгота: ${coords.longitude}`
-//     );
-//   })
-//   .catch((error) => {
-//     console.error(error);
-//   });
-// // Coordinates of the points
-// var pointA = [55.751244, 37.618423]; // Moscow
-// var pointB = [59.93428, 30.335099]; // Saint Petersburg
-
-// ymaps.route([pointA, pointB]).then(
-//   function (route) {
-//     let distance = route.getLength();
-//     console.log("Distance between the points: " + distance + " meters");
-//   },
-//   function (error) {
-//     console.log("An error occurred: " + error.message);
-//   }
-// );
-//}

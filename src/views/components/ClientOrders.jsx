@@ -10,6 +10,7 @@ module.exports = function ClientOrders({ orders }) {
             <div className="order-container" id={order.id} key={order.id}>
               <img src={order.url} alt={order.name} className="orderClient-image" />
               <span className="order-text">{order.name}</span> 
+              <span className="order-text">{order.name}</span> 
               <a href="#" className="btn btn-warning btn-sm accept">Принять заказ</a> 
             </div>
           ))}

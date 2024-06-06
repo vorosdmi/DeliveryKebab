@@ -18,6 +18,8 @@ indexRouter.get("/", async (req, res) => {
     const ordersRes = orders.map((el) => el.get({ plain: true }));
     const ordersRes2 = ordersRes.filter((el) => !(el.clientId === userId));
     const ordersCart = ordersRes.filter((el) => (el.clientId === userId));
+    console.log('ordersRes2 >>> ', ordersRes2);
+    console.log('ordersCart >>> ', ordersCart);
     
     const user = await User.findByPk(userId);
     if (user.isCourier) {
@@ -29,7 +31,6 @@ indexRouter.get("/", async (req, res) => {
     const orders = await Order.findAll({ where: { isAccepted: false } });
     const ordersRes = orders.map((el) => el.get({ plain: true }));
 
-    console.log(ordersRes);
     renderTemplate(Home, { orders: ordersRes }, res);
   }
 });
