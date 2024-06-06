@@ -6,27 +6,27 @@ const { Op } = require('sequelize');
 
 // 1. Ручка get('/courier') - все заказы курьера
 orderRouter.get("/courier", async (req, res) => {
-  const { number } = req.session;
-  const { userId } = req.session;
+  const { number, userName, userId } = req.session;
   try {
     const courierOrders = await Order.findAll({
       where: {
         courierId : userId,
-        isAccepted : false,
+        isReady : false,
       }, 
       raw: true 
     });
     const clientOrders = await Order.findAll({
       where: {
         courierId : userId,
-        isAccepted : false,
-        clientId: {
-          [Op.ne]: null, // Проверка, что clientId не равен null
-        }, 
+        isReady : false,
+        isAccepted: false,
+        // clientId: {
+        //   [Op.ne]: null, // Проверка, что clientId не равен null
+        // }, 
       }, 
       raw: true 
     });
-    renderTemplate(Courier, { number, courierOrders, clientOrders }, res);
+    renderTemplate(Courier, { number, userName, courierOrders, clientOrders }, res);
   } catch (error) {
     res.send(`Ошибка страницы курьера: , ${error}`);
   } 
@@ -36,8 +36,9 @@ orderRouter.get("/courier", async (req, res) => {
 orderRouter.post('/', async(req, res) => {
   const { name, url, price, discount, courierAddress } = req.body;
   // const clientId = 0;
-  const clientAddress = 'город Челябинск, улица Володарского, дом 13';
+  const clientAddress = '';
   const isAccepted = false;  
+  const isReady= false;
   const courierId = req.session.userId;
   try { 
     const newOrder = await Order.create({ 

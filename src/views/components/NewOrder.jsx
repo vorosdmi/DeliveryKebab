@@ -3,9 +3,9 @@ const React = require('react');
 module.exports = function NewOrder({ login, orders }) {
   return (
     <div className='newOrderContainer'>
-      <h3 className="hTag">Разместить новый заказ</h3>
-      <div className="locationDiv"></div>
+      <h3 className="hTag">Новый заказ</h3>
       <hr />
+      <div className="locationDiv"></div>   
       <form action="/orders" className="horizontal-form">
         <div className="form-group">
           <input name="name" type="text" className="form-control shadow rounded" id="exampleInput1" placeholder='Название'/>

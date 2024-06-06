@@ -4,9 +4,9 @@ const NewOrder = require('../components/NewOrder');
 const CourierOrders = require('../components/CourierOrders');
 const ClientOrders = require('../components/ClientOrders');
 
-module.exports = function Courier({ number, courierOrders, clientOrders }) {
+module.exports = function Courier({ number, userName, courierOrders, clientOrders }) {
   return (
-    <Layout number={number}>
+    <Layout number={number} userName={userName}>
       <NewOrder />
       <div className="orders-container">
         <CourierOrders orders={courierOrders} />

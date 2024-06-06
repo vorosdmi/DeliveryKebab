@@ -20,7 +20,7 @@ function getCityName(lat, lon) {
     .then((response) => response.json())
     .then((data) => {
       const locationDiv = document.querySelector('.locationDiv');
-      locationDiv.innerText = `${data.display_name}`;
+      locationDiv.innerText = `📍 ${data.display_name}`;
     })
     .catch((error) => {
       console.error('Ошибка запроса: ', error);
