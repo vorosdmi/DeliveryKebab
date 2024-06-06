@@ -32,10 +32,10 @@ module.exports = function Layout({
         ></script>
         <link rel="stylesheet" href="/css/style.css" />
         <title>KuKu</title>
-        <script
+        {/* <script
           src="https://api-maps.yandex.ru/2.1/?&amp;id=mymap&amp;lang=ru_RU&amp;apikey=513313f4-6089-4a80-b442-af1d3277a73e"
           type="text/javascript"
-        ></script>
+        ></script> */}
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
         <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet"/>
@@ -65,7 +65,7 @@ module.exports = function Layout({
                       Home
                     </a>
                   </li>
-                  {isCourier ? (
+                  {!isCourier ? (
                   <li className="nav-item">
                     <a className="nav-link cartNav" href={`/cart/${userId}`}>
                       {orders.length === 0 ? (
@@ -91,7 +91,7 @@ module.exports = function Layout({
             </div>
           </nav>
         ) : (
-          <nav className="navbar navbar-expand-lg bg-light">
+          <nav className="navbar navbar-expand-lg bg-light fixed-top">
             <div className="container-fluid">
               <a className="navbar-brand" href="/">
                 Home

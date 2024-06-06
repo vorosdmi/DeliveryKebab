@@ -12,6 +12,7 @@ orderRouter.get("/courier", async (req, res) => {
       where: {
         courierId : userId,
         isReady : false,
+        isAccepted: false,
       }, 
       raw: true 
     });
@@ -77,7 +78,7 @@ orderRouter.delete('/:id', async(req, res) => {
 orderRouter.patch('/courier/:id', async(req, res) => {
   try { 
     const curOrder = await Order.findOne({ where: { id: +req.params.id } })
-    curOrder.isAccepted = true;
+    curOrder.isReady = true;
     await curOrder.save();
     res.json({ status: 'success' });
   } catch (error) {
