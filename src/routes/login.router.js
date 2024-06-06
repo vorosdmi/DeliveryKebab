@@ -25,6 +25,7 @@ loginRouter.post('/', async (req, res) => {
         req.session.number = user.number; 
         req.session.userId = user.id;
         req.session.userName = user.name;
+        req.session.isCourier = user.isCourier;
         req.session.save(() => {
           //const { id } = user
           console.log('Password correct. Session saved');

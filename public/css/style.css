@@ -1,3 +1,8 @@
+body {
+  font-family: 'Comfortaa', sans-serif;
+  padding-top: 60px;
+}
+
 button.navbar-toggler {
   position: fixed;
   right: 0;
@@ -237,8 +242,13 @@ nav.navbar.navbar-expand-lg.bg-light {
     display: flex;
   }
 
-  .clientOrdersContainer,
+  /* .clientOrdersContainer,
   .courierOrdersContainer {
+    width: 49%;
+  } */
+
+  .courier-floating-container,
+  .client-floating-container {
     width: 49%;
   }
 
@@ -285,4 +295,14 @@ nav.navbar.navbar-expand-lg.bg-light {
     margin-top: 10px;
     width: 100%;
   }
-  
+
+  .floating-container,
+  .courier-floating-container,
+  .client-floating-container {
+    background-color: #fff; /* Цвет фона */
+    border: 1px solid #ccc; /* Граница */
+    border-radius: 8px; /* Скругление углов */
+    padding: 10px; /* Внутренние отступы */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    margin: 0 20px; /* Отступы слева и справа */
+  }

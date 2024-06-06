@@ -29,52 +29,6 @@ function getCityName(lat, lon) {
 getLocation();
 const formNew = document.querySelector('.horizontal-form');
 
-
-
-
-// РАССЧИТЫВАЕМ РАССТОЯНИЕ МЕЖДУ ТОЧКАМИ
-
-// const apiKey = '513313f4-6089-4a80-b442-af1d3277a73e';
-// const lat1 = 55.751574; // широта первой точки
-// const lon1 = 37.573856; // долгота первой точки
-// const lat2 = 55.753994; // широта второй точки
-// const lon2 = 37.622093; // долгота второй точки
-
-// const apiUrl = `https://api-maps.yandex.ru/services/route/2.1/?apikey=${apiKey}&lang=ru_RU&routingMode=auto&points=${lat1},${lon1}~${lat2},${lon2}`;
-
-// fetch(apiUrl)
-//   .then(response => response.json())
-//   .then(data => {
-//     // Извлечение расстояния из ответа API
-//     const distance = data.routes[0].distance; // Расстояние в метрах
-//     console.log("Расстояние между точками:", distance, "метров");
-//   })
-//   .catch(error => console.error("Ошибка:", error));
-
-// ymaps.ready(init);
-
-// function init() {
-//     // Coordinates of the points
-//     var pointA = [55.751244, 37.618423]; // Moscow
-//     var pointB = [59.934280, 30.335099]; // Saint Petersburg
-
-//     // Calculate the route between the points
-//     ymaps.route([pointA, pointB]).then(function (route) {
-//         // Add the route to the map
-//         // myMap.geoObjects.add(route);
-
-//         // Get the distance of the route
-//         var distance = route.getLength();
-//         alert("Distance between the points: " + distance + " meters");
-//     }, function (error) {
-//         alert("An error occurred: " + error.message);
-//     });
-// }
-
-
-
-
-
 formNew.addEventListener('submit', async (e) => {
   // ДОБАВЛЕНИЕ
   e.preventDefault();

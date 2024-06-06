@@ -25,6 +25,7 @@ regRouter.post('/', async (req, res) => {
       req.session.number = newUser.number; // или EMAIL или MAIL
       req.session.userId = newUser.id; 
       req.session.userName = newUser.name; 
+      req.session.isCourier = newUser.isCourier;
       req.session.save(() => {
         res.json({ regDone: `Registration succes ${number}` }); // для fetch-a
         // res.redirect('/');

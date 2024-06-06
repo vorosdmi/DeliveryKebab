@@ -6,7 +6,7 @@ const { Op } = require('sequelize');
 
 // 1. Ручка get('/courier') - все заказы курьера
 orderRouter.get("/courier", async (req, res) => {
-  const { number, userName, userId } = req.session;
+  const { number, userName, userId, isCourier } = req.session;
   try {
     const courierOrders = await Order.findAll({
       where: {
@@ -26,7 +26,7 @@ orderRouter.get("/courier", async (req, res) => {
       }, 
       raw: true 
     });
-    renderTemplate(Courier, { number, userName, courierOrders, clientOrders }, res);
+    renderTemplate(Courier, { number, userName, courierOrders, clientOrders, isCourier }, res);
   } catch (error) {
     res.send(`Ошибка страницы курьера: , ${error}`);
   } 

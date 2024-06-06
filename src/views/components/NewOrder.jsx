@@ -3,7 +3,7 @@ const React = require('react');
 module.exports = function NewOrder({ login, orders }) {
   return (
     <div className='newOrderContainer'>
-      <h3 className="hTag">Новый заказ</h3>
+      <h3 className="hTag" style={{fontWeight: "bold"}}>Новый заказ</h3>
       <hr />
       <div className="locationDiv"></div>   
       <form action="/orders" className="horizontal-form">
