@@ -8,6 +8,8 @@ module.exports = function Home({ number, userName, userId, orders }) {
   const courierAddresses = orders.map(order => order.courierAddress+';');
   console.log('!!!!', courierAddresses);
 
+  //!!!!!!!!!!!!!!!ОБРАБАТЫВАЕМ ЗАКАЗЫ!!!!!!!!!!!!!!!
+
   return (
     <Layout number={number} userName={userName} userId={userId}>
       <div className="containerMap" data-addresses={courierAddresses} data-number={number} data-userid={userId}>

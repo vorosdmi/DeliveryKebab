@@ -19,10 +19,11 @@ module.exports = function Layout({ children, number, userName, userId }) {
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
           crossOrigin="anonymous"
         />
+        <script src="https://api-maps.yandex.ru/2.1/?apikey=513313f4-6089-4a80-b442-af1d3277a73e&lang=ru_RU" type="text/javascript"></script>
         <link rel="stylesheet" href="/css/style.css" />
         <title>KuKu</title>
         <script
-        
+
           src="https://api-maps.yandex.ru/2.1/?&amp;id=mymap&amp;lang=ru_RU&amp;apikey=513313f4-6089-4a80-b442-af1d3277a73e"
           type="text/javascript"
         ></script>
@@ -57,15 +58,15 @@ module.exports = function Layout({ children, number, userName, userId }) {
                       корзина
                     </a>
                   </li>
-                  
+
                 </ul>
                 <ul className="navbar-nav ms-auto">
-        <li className="nav-item">
-          <a className="nav-link logout" href="/logout">
-            Logout
-          </a>
-        </li>
-      </ul>
+                  <li className="nav-item">
+                    <a className="nav-link logout" href="/logout">
+                      Logout
+                    </a>
+                  </li>
+                </ul>
               </div>
             </div>
           </nav>

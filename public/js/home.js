@@ -251,6 +251,8 @@ function addPlacemarkByAddress(address, map) {
     .catch(function (error) {
       console.error("Ошибка при геокодировании адреса:", error);
     });
+
+    
 }
 
 //!

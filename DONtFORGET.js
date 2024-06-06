@@ -1,4 +1,6 @@
 /* eslint-disable max-len */
+//! for Mail TZ5zsnhz5GReNVABskcf
+
 //! CHANGE KONFIG
 
 // ? создаем базу данных (npx sequelize db:create)

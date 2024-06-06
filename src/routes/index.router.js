@@ -4,6 +4,7 @@ const Home = require("../views/pages/Home");
 const { User, Order } = require("../../db/models");
 const { checkUser, checkUserCart } = require("../middlewares/common");
 const Cart = require("../views/pages/Cart");
+const nodemailer = require("nodemailer");
 
 //? home рендеринг
 
@@ -16,8 +17,13 @@ indexRouter.get("/", async (req, res) => {
     const orders = await Order.findAll({ where: { isAccepted: false } });
     const ordersRes = orders.map((el) => el.get({ plain: true }));
     const ordersRes2 = ordersRes.filter((el) => !(el.clientId === userId));
-  
-    renderTemplate(Home, { number, userName, userId, orders: ordersRes2 }, res);
+    
+    const user = await User.findByPk(userId);
+    if (user.isCourier) {
+      res.redirect('/orders/courier')
+    } else {
+      renderTemplate(Home, { number, userName, userId, orders: ordersRes2 }, res);
+    }
   } else {
     const orders = await Order.findAll({ where: { isAccepted: false } });
     const ordersRes = orders.map((el) => el.get({ plain: true }));
@@ -91,17 +97,22 @@ indexRouter.patch("/cart/:orderId", async (req, res) => {
 
 //? оформляем заказ
 
+
+
 indexRouter.patch("/cart/allarders/:userId", async (req, res) => {
-  //* update
   const { userId } = req.params;
-  //const { userId } = req.body //! clientAddress, clientId
+  const { userName, number } = req.session; // Предполагается, что эти данные хранятся в сессии
   console.log("*********** ", userId);
+
   try {
+    // Обновляем заказы
     console.log("*");
     const orders = await Order.findAll({ where: { clientId: userId } });
     console.log("ORDERSSS ", orders);
-    if (!orders) {
-      return res.status(404).json({ status: "error", message: " not found" });
+    if (!orders || orders.length === 0) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "Заказы не найдены" });
     }
 
     for (let el of orders) {
@@ -109,10 +120,40 @@ indexRouter.patch("/cart/allarders/:userId", async (req, res) => {
       await el.save();
     }
 
-    res.json({ status: "success" });
+    // Настраиваем транспортер для отправки email
+    const transporter = nodemailer.createTransport({
+      host: "smtp.mail.ru",
+      port: 465,
+      secure: true,
+      auth: {
+        user: "chectb@mail.ru",
+        pass: "x2V9PHZRGh0hx5zfcsEe",
+      },
+    });
+
+    await transporter.sendMail({
+      from: "chectb@mail.ru",
+      to: "chectb@mail.ru",
+      subject: `Заказ от пользователя ${userName}`,
+      text: `Имя: ${userName}\nТелефон: ${number}\nID пользователя: ${userId}`,
+      html: `
+        <p><strong>Имя:</strong> ${userName}</p>
+        <p><strong>Телефон:</strong> ${number}</p>
+        <p><strong>ID пользователя:</strong> ${userId}</p>
+      `,
+    });
+
+    res.json({
+      status: "success",
+      message: "Заказы обновлены и уведомление отправлено",
+    });
   } catch (err) {
-    console.log(`Error on taskRouter.patch(${userId}) ====>>>>`, err);
-    res.status(500).json({ error: "Error updating task" });
+    console.log(`Ошибка в taskRouter.patch(${userId}) ====>>>>`, err);
+    res
+      .status(500)
+      .json({
+        error: "Ошибка при обновлении заказов или отправке уведомления",
+      });
   }
 });
 
