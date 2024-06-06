@@ -1,12 +1,17 @@
-const FEEDBACK_FORM = document.querySelector("#feedback-form");
+const placeOrder = document.querySelector('.placeOrder');
 
-function sendFeedback(feedback) {
+placeOrder.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  sendFeedback();
+});
+
+function sendFeedback() {
   fetch("/api/feedback", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(feedback),
   })
     .then((response) => response.json())
     .then((data) => {
@@ -18,11 +23,3 @@ function sendFeedback(feedback) {
       alert("Произошла ошибка. Пожалуйста, попробуйте еще раз.");
     });
 }
-
-FEEDBACK_FORM.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const feedbackFormData = new FormData(e.target);
-  const feedback = Object.fromEntries(feedbackFormData);
-
-  sendFeedback(feedback);
-});
