@@ -17,8 +17,13 @@ indexRouter.get("/", async (req, res) => {
     const orders = await Order.findAll({ where: { isAccepted: false } });
     const ordersRes = orders.map((el) => el.get({ plain: true }));
     const ordersRes2 = ordersRes.filter((el) => !(el.clientId === userId));
-  
-    renderTemplate(Home, { number, userName, userId, orders: ordersRes2 }, res);
+    
+    const user = await User.findByPk(userId);
+    if (user.isCourier) {
+      res.redirect('/orders/courier')
+    } else {
+      renderTemplate(Home, { number, userName, userId, orders: ordersRes2 }, res);
+    }
   } else {
     const orders = await Order.findAll({ where: { isAccepted: false } });
     const ordersRes = orders.map((el) => el.get({ plain: true }));
