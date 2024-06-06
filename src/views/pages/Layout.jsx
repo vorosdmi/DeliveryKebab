@@ -1,8 +1,8 @@
 const React = require('react');
 
 //* условная верстка для navBar
-module.exports = function Layout({ children, number, user }) {
-  console.log(user);
+module.exports = function Layout({ children, number }) {
+  console.log('////////', number);
   return (
     <html lang="en">
       <head>
@@ -16,6 +16,7 @@ module.exports = function Layout({ children, number, user }) {
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
           crossOrigin="anonymous"
         />
+        <script src="https://api-maps.yandex.ru/2.1/?apikey=513313f4-6089-4a80-b442-af1d3277a73e&lang=ru_RU" type="text/javascript"></script>
         <link rel="stylesheet" href="/css/style.css" />
         <title>KuKu</title>
       </head>

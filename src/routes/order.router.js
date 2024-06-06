@@ -1,28 +1,87 @@
 const orderRouter = require('express').Router();
 const { Order } = require('../../db/models');
 const Courier= require('../views/pages/Сourier');
+const renderTemplate = require('../utils/renderTemplate');
+const { Op } = require('sequelize');
 
 // 1. Ручка get('/courier') - все заказы курьера
-indexRouter.get("/courier", async (req, res) => {
-  const { login, userId } = req.session;
+orderRouter.get("/courier", async (req, res) => {
+  const { number } = req.session;
+  const { userId } = req.session;
   try {
-    const orders = await Order.findAll({
-      where: {courierId : userId}, 
+    const courierOrders = await Order.findAll({
+      where: {
+        courierId : userId,
+        isAccepted : false,
+      }, 
       raw: true 
     });
-    renderTemplate(Courier, { login, orders }, res);
+    const clientOrders = await Order.findAll({
+      where: {
+        courierId : userId,
+        isAccepted : false,
+        clientId: {
+          [Op.ne]: null, // Проверка, что clientId не равен null
+        }, 
+      }, 
+      raw: true 
+    });
+    renderTemplate(Courier, { number, courierOrders, clientOrders }, res);
   } catch (error) {
     res.send(`Ошибка страницы курьера: , ${error}`);
   } 
 });
 
-// #TODO 
 // 2. Ручка post('/') - создание нового заказа курьером (заполняем в Orders поля courierId и courierAddress)
+orderRouter.post('/', async(req, res) => {
+  const { name, url, price, discount, courierAddress } = req.body;
+  // const clientId = 0;
+  const clientAddress = 'город Челябинск, улица Володарского, дом 13';
+  const isAccepted = false;  
+  const courierId = req.session.userId;
+  try { 
+    const newOrder = await Order.create({ 
+      name, 
+      url, 
+      price, 
+      discount, 
+      courierAddress, 
+      courierId,
+      clientAddress,
+      isAccepted
+    });
+    res.json({ newDone: newOrder });  
+  } catch (error) {
+    console.log(error);
+    res.json({newError: `Error! Something went wrong :(`})    
+  }
+})
+
+orderRouter.delete('/:id', async(req, res) => {
+  try { 
+    await Order.destroy({ where: { id: +req.params.id } })
+    res.json({ status: 'success' });
+  } catch (error) {
+    console.log(error);
+    res.json({ status: 'error' });    
+  }
+})
 
 // #TODO 
 // 3. Ручка patch('/client/:id') - клиент нажимает Заказать (заполняем в Orders поля clientId и clientAddress)
 
 // #TODO 
 // 4. Ручка patch('/courier/:id') - курьер нажимает Принять заказ (заполняем в Orders поле isAccepted)
+orderRouter.patch('/courier/:id', async(req, res) => {
+  try { 
+    const curOrder = await Order.findOne({ where: { id: +req.params.id } })
+    curOrder.isAccepted = true;
+    await curOrder.save();
+    res.json({ status: 'success' });
+  } catch (error) {
+    console.log(error);
+    res.json({ status: 'error' });    
+  }
+})
 
 module.exports = orderRouter;
