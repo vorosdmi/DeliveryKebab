@@ -414,3 +414,8 @@ button {
   height: 70vh;
   overflow-y: auto; /* Добавляем вертикальную прокрутку */
 }
+
+.highlight {
+  background-color: #d9534f;
+  color: white; /* Цвет текста будет белым, чтобы он был виден на фоне */
+}
