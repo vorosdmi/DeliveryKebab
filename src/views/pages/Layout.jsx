@@ -7,6 +7,7 @@ module.exports = function Layout({
   userName,
   userId,
   orders,
+  isCourier
 }) {
   return (
     <html lang="en">
@@ -35,10 +36,13 @@ module.exports = function Layout({
           src="https://api-maps.yandex.ru/2.1/?&amp;id=mymap&amp;lang=ru_RU&amp;apikey=513313f4-6089-4a80-b442-af1d3277a73e"
           type="text/javascript"
         ></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet"/>
       </head>
       <header>
         {number ? (
-          <nav className="navbar navbar-expand-lg custom-navbar">
+          <nav className="navbar navbar-expand-lg custom-navbar fixed-top">
             <div className="container-fluid">
               <span className="navbar-brand" href="/">
                 Hello, <span className="name">{userName}!</span>
@@ -61,6 +65,7 @@ module.exports = function Layout({
                       Home
                     </a>
                   </li>
+                  {isCourier ? (
                   <li className="nav-item">
                     <a className="nav-link cartNav" href={`/cart/${userId}`}>
                       {orders.length === 0 ? (
@@ -73,6 +78,7 @@ module.exports = function Layout({
                       )}
                     </a>
                   </li>
+                ) : null}
                 </ul>
                 <ul className="navbar-nav ms-auto">
                   <li className="nav-item">
@@ -85,7 +91,7 @@ module.exports = function Layout({
             </div>
           </nav>
         ) : (
-          <nav className="navbar navbar-expand-lg custom-navbar">
+          <nav className="navbar navbar-expand-lg bg-light">
             <div className="container-fluid">
               <a className="navbar-brand" href="/">
                 Home

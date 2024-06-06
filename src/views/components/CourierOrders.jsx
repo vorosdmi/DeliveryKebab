@@ -3,7 +3,7 @@ const React = require('react');
 module.exports = function CourierOrders({ orders }) {
   return (
     <div className='courierOrdersContainer'>
-      <h3 className="hTag">Ваши размещенные заказы</h3>
+      <h3 className="hTag" style={{fontWeight: "bold"}}>Ваши размещенные заказы</h3>
       <hr />
         <div className="orderCourier-pictures">
           {orders.map((order) => (
