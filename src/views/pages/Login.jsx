@@ -5,6 +5,8 @@ const Layout = require("./Layout");
 module.exports = function Login() {
   return (
     <Layout>
+      <div className="contPage">
+      <div className="contReg">
       <h3 className="hTag">
         Пожалуйста, введите ваш <br />
         номер телефона и пароль
@@ -37,6 +39,8 @@ module.exports = function Login() {
       </form>
       <h3 className="loginErr"></h3>
       <hr />
+      </div>
+      </div>
       <script src="/js/login.js"></script>
     </Layout>
   );

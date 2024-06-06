@@ -1,7 +1,14 @@
 const React = require("react");
 
 //* условная верстка для navBar
-module.exports = function Layout({ children, number, userName, userId, isCourier }) {
+module.exports = function Layout({
+  children,
+  number,
+  userName,
+  userId,
+  orders,
+  isCourier
+}) {
   return (
     <html lang="en">
       <head>
@@ -19,11 +26,13 @@ module.exports = function Layout({ children, number, userName, userId, isCourier
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
           crossOrigin="anonymous"
         />
-        <script src="https://api-maps.yandex.ru/2.1/?apikey=513313f4-6089-4a80-b442-af1d3277a73e&lang=ru_RU" type="text/javascript"></script>
+        <script
+          src="https://api-maps.yandex.ru/2.1/?apikey=513313f4-6089-4a80-b442-af1d3277a73e&lang=ru_RU"
+          type="text/javascript"
+        ></script>
         <link rel="stylesheet" href="/css/style.css" />
         <title>KuKu</title>
         <script
-
           src="https://api-maps.yandex.ru/2.1/?&amp;id=mymap&amp;lang=ru_RU&amp;apikey=513313f4-6089-4a80-b442-af1d3277a73e"
           type="text/javascript"
         ></script>
@@ -32,82 +41,89 @@ module.exports = function Layout({ children, number, userName, userId, isCourier
         <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet"/>
       </head>
       <header>
-      {number ? (
-        <nav className="navbar navbar-expand-lg bg-light fixed-top">
-          <div className="container-fluid">
-            <span className="navbar-brand" href="/">
-              Hello, {userName}!
-            </span>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon" />
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav">
-                <li className="nav-item">
-                  <a className="nav-link" href="/">
-                    Home
-                  </a>
-                </li>
-                {isCourier ? (
+        {number ? (
+          <nav className="navbar navbar-expand-lg custom-navbar fixed-top">
+            <div className="container-fluid">
+              <span className="navbar-brand" href="/">
+                Hello, <span className="name">{userName}!</span>
+              </span>
+              <button
+                className="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span className="navbar-toggler-icon" />
+              </button>
+              <div className="collapse navbar-collapse" id="navbarNav">
+                <ul className="navbar-nav">
                   <li className="nav-item">
-                    <a className="nav-link" href={`/cart/${userId}`}>
-                      Корзина
+                    <a className="nav-link" href="/">
+                      Home
+                    </a>
+                  </li>
+                  {isCourier ? (
+                  <li className="nav-item">
+                    <a className="nav-link cartNav" href={`/cart/${userId}`}>
+                      {orders.length === 0 ? (
+                        "корзина"
+                      ) : (
+                        <>
+                          корзина
+                          <span className="text_cart">({orders.length})</span>
+                        </>
+                      )}
                     </a>
                   </li>
                 ) : null}
-              </ul>
-              <ul className="navbar-nav ms-auto">
-                <li className="nav-item">
-                  <a className="nav-link logout" href="/logout">
-                    Logout
-                  </a>
-                </li>
-              </ul>
+                </ul>
+                <ul className="navbar-nav ms-auto">
+                  <li className="nav-item">
+                    <a className="nav-link logout" href="/logout">
+                      Logout
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
-        </nav>
-      ) : (
-        <nav className="navbar navbar-expand-lg bg-light fixed-top">
-          <div className="container-fluid">
-            <a className="navbar-brand" href="/">
-              Home
-            </a>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon" />
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav">
-                <li className="nav-item">
-                  <a className="nav-link" href="/login">
-                    Login
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/register">
-                    Registration
-                  </a>
-                </li>
-              </ul>
+          </nav>
+        ) : (
+          <nav className="navbar navbar-expand-lg bg-light">
+            <div className="container-fluid">
+              <a className="navbar-brand" href="/">
+                Home
+              </a>
+              <button
+                className="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span className="navbar-toggler-icon" />
+              </button>
+              <div className="collapse navbar-collapse" id="navbarNav">
+                <ul className="navbar-nav">
+                  <li className="nav-item">
+                    <a className="nav-link" href="/login">
+                      Login
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/register">
+                      Registration
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
-        </nav>
-      )}
+          </nav>
+        )}
       </header>
       <body>
         {children}

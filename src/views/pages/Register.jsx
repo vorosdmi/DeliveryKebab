@@ -5,6 +5,8 @@ const Layout = require("./Layout");
 module.exports = function Register() {
   return (
     <Layout>
+      <div className="contPage">
+      <div className="contReg">
       <h3>
         Добро пожаловать! <br />
         Давайте зарегистрируемся
@@ -31,6 +33,16 @@ module.exports = function Register() {
           id="exampleInput2"
         />
 
+<label htmlFor="exampleInput3" className="form-label">
+          Email
+        </label>
+        <input
+          name="email"
+          type="email"
+          className="form-control shadow rounded"
+          id="exampleInput3"
+        />
+
         <label htmlFor="exampleInput2" className="form-label">
           Password
         </label>
@@ -40,13 +52,15 @@ module.exports = function Register() {
           className="form-control shadow rounded"
           id="exampleInput3"
         />
-
+<br />
         <button type="submit" className="btn btn-primary shadow rounded">
           Registration
         </button>
       </form>
       <h3 className="regErrMsg"></h3>
       <hr />
+      </div>
+      </div>
       <script defer src="/js/reg.js" />
     </Layout>
   );
