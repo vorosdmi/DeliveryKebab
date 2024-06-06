@@ -9,7 +9,7 @@ module.exports = function Home({ number, userName, userId, orders, ordersCart })
   return (
     <Layout number={number} userName={userName} userId={userId} orders={ordersCart} isCourier={false}>
       <div className="containerMap" data-addresses={courierAddresses} data-number={number} data-userid={userId} data-ordercards={JSON.stringify(ordersCart)}>
-        <h1 id="mainTitle">Добро пожаловать в Деливери кебаб!</h1>
+        <h1 id="mainTitle">Добро пожаловать в <span class="highlight">Деливери кебаб</span></h1>
         <h8>
           Выберите и оформите себе заказ из указанного списка
           блюд по привлекательной цене!
@@ -24,9 +24,6 @@ module.exports = function Home({ number, userName, userId, orders, ordersCart })
           <div className="containerAll" data-allorders={JSON.stringify(orders)} />
         </div>
       </div>
-
-      
-
       <script src="/js/home.js"></script>
     </Layout>
   );
