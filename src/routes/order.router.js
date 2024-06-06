@@ -19,7 +19,7 @@ orderRouter.get("/courier", async (req, res) => {
       where: {
         courierId : userId,
         isReady : false,
-        isAccepted: false,
+        isAccepted: true,
         // clientId: {
         //   [Op.ne]: null, // Проверка, что clientId не равен null
         // }, 
@@ -49,7 +49,8 @@ orderRouter.post('/', async(req, res) => {
       courierAddress, 
       courierId,
       clientAddress,
-      isAccepted
+      isAccepted,
+      isReady
     });
     res.json({ newDone: newOrder });  
   } catch (error) {
