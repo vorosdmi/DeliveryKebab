@@ -12,7 +12,7 @@ regRouter.get('/', (req, res) => {
 
 regRouter.post('/', async (req, res) => {
   try {
-    const { name, password, number } = req.body;
+    const { name, password, number, email } = req.body;
     //! здесь можно написать регулярку для номера тел
     const user = await User.findOne({ where: { number } });
     if (user) {
@@ -21,7 +21,7 @@ regRouter.post('/', async (req, res) => {
     } else {
       //! bcrypt hash
       const hash = await bcrypt.hash(password, 10);
-      const newUser = await User.create({ name, password: hash, number });
+      const newUser = await User.create({ name, password: hash, number, email });
       req.session.number = newUser.number; // или EMAIL или MAIL
       req.session.userId = newUser.id; 
       req.session.userName = newUser.name; 

@@ -3,6 +3,11 @@ const btn = document.querySelector(".placeOrder");
 const allCost = document.querySelector(".allCost");
 let dataAllPrice = allCost.dataset.allprice;
 console.log(dataAllPrice);
+const cartNav = document.querySelector('.cartNav')
+
+const mainContainerCart = document.querySelector('.mainContainerCart')
+const orderCards = mainContainerCart.dataset.ordercards
+let CARTS = JSON.parse(orderCards).length
 //? удаление из корзины
 
 container.addEventListener("click", async (e) => {
@@ -28,9 +33,12 @@ container.addEventListener("click", async (e) => {
         e.target.closest(".cardCart").remove();
         dataAllPrice -= dataPrice;
         allCost.innerText = `Итоговая стоимость: ${dataAllPrice}.руб`;
+        CARTS -=1
+        cartNav.innerHTML = `корзина<span class="text_cart">(${CARTS})</span>`;
         if (dataAllPrice === 0) {
           btn.classList.remove("placeOrder"); 
           btn.classList.add("elementHiddn"); 
+          cartNav.innerHTML = `корзина`;
         }
       } else {
         alert("что-то пошло не так");
@@ -49,7 +57,7 @@ btn.addEventListener("click", async (e) => {
   //console.log(userId);
   //! местоположение должно быть ранее привязано
   try {
-    const response = await fetch(`/cart/allarders/${userId}`, {
+    const response = await fetch(`/cart/allorders/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

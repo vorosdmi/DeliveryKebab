@@ -3,7 +3,7 @@ const Layout = require("./Layout");
 const Card = require("../components/Card");
 //const getLocation = require('../../../public/js/test')
 
-module.exports = function Home({ number, userName, userId, orders }) {
+module.exports = function Home({ number, userName, userId, orders, ordersCart }) {
  //? имеющиеся адреса для меток
   const courierAddresses = orders.map(order => order.courierAddress+';');
   console.log('!!!!', courierAddresses);
@@ -11,8 +11,8 @@ module.exports = function Home({ number, userName, userId, orders }) {
   //!!!!!!!!!!!!!!!ОБРАБАТЫВАЕМ ЗАКАЗЫ!!!!!!!!!!!!!!!
 
   return (
-    <Layout number={number} userName={userName} userId={userId}>
-      <div className="containerMap" data-addresses={courierAddresses} data-number={number} data-userid={userId}>
+    <Layout number={number} userName={userName} userId={userId} orders={ordersCart}>
+      <div className="containerMap" data-addresses={courierAddresses} data-number={number} data-userid={userId} data-ordercards={JSON.stringify(ordersCart)}>
       {/* <div className="containerMap" data-addresses={JSON.stringify(orders)}> */}
         <h4>Добро пожаловать в Деливери кебаб!</h4>
         <h6>
@@ -20,7 +20,7 @@ module.exports = function Home({ number, userName, userId, orders }) {
           блюд по привлекательной цене!
         </h6>
       </div>
-      <div className="containerMinMap">
+      <div className="containerMinMap" >
         <div className="map" id="mymap"></div>
 
         <div className="text-map">
@@ -29,7 +29,7 @@ module.exports = function Home({ number, userName, userId, orders }) {
         </div>
       </div>
 
-      <div className="containerAll" data-allorders={JSON.stringify(orders)}>
+      <div className="containerAll" data-allorders={JSON.stringify(orders)} >
         {/* {orders.map((order) => (
           <div className="card" key={order.id}>
             <div className="card-title">{order.name}</div>

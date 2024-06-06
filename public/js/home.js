@@ -3,15 +3,18 @@ const elementAddresses = document.querySelector(".containerMap");
 const addressesArr = elementAddresses.dataset.addresses;
 const addresses = addressesArr.split(";");
 addresses.pop();
-const userId = elementAddresses.dataset.userid
-const number = elementAddresses.dataset.number
+const userId = elementAddresses.dataset.userid;
+const number = elementAddresses.dataset.number;
+const ordersCarts = elementAddresses.dataset.ordercards
+let CARTS = JSON.parse(ordersCarts).length
+const cartNav = document.querySelector('.cartNav')
 
 const allOrders = container.dataset.allorders;
 const allOrdersRes = JSON.parse(allOrders);
 //allOrdersRes.shift();
 console.log(1, allOrdersRes);
-console.log(2, allOrdersRes[0].courierAddress);
-console.log(3, allOrdersRes[0].clientAddress);
+//console.log(2, allOrdersRes[0].courierAddress);
+//console.log(3, allOrdersRes[0].clientAddress);
 //console.log('addressesArr', JSON.parse(addressesArr));
 
 //! геолокация
@@ -91,22 +94,22 @@ function getLocation() {
               "RESULT ",
               allOrdersRes.map((order) => order.distance)
             );
-            allOrdersRes.sort((a, b) => a.distance - b.distance)
-console.log('SORT ', allOrdersRes);
+            allOrdersRes.sort((a, b) => a.distance - b.distance);
+            console.log("SORT ", allOrdersRes);
 
-
-
-const resultContainer = allOrdersRes.map((order) => (
-  `<div class="card" key=${order.id}>
+            const resultContainer = allOrdersRes.map(
+              (order) =>
+                `<div class="card" key=${order.id}>
   <div class="card-title">${order.name}</div>
 
   <div class="card-text">Исходная цена: ${order.price}p.</div>
   <div class="card-text">
     Цена со скидкой:
-    ${Number(order.price) -
-      (Number(order.price) * Number(order.discount)) / 100}
+    ${
+      Number(order.price) - (Number(order.price) * Number(order.discount)) / 100
+    }
   </div>
-  <div class="card-text">Расстояние до вас: ${order.distance}</div>
+  <div class="card-text">Расстояние до вас: ${order.distance}км.</div>
   <div class="card-text">
     
     📍 ${order.courierAddress}
@@ -115,11 +118,11 @@ const resultContainer = allOrdersRes.map((order) => (
     src=${order.url}
     class="card-img-topp"
     alt="food"
-    width="200"
+    width="217"
     height="200"
   />
   <a
-    href="#"
+    
     class=${number ? "btn-add" : "elementHiddn"}
     data-location=""
     data-odrerlocation=""
@@ -130,13 +133,11 @@ const resultContainer = allOrdersRes.map((order) => (
     добавить в корзину
   </a>
 </div>`
-))
+            );
 
-container.innerHTML = resultContainer.join(' ')
+            container.innerHTML = resultContainer.join(" ");
 
-console.log('RESULTCONT', resultContainer);
-
-
+            console.log("RESULTCONT", resultContainer);
           };
 
           // Вызов функции для расчета расстояний
@@ -251,8 +252,6 @@ function addPlacemarkByAddress(address, map) {
     .catch(function (error) {
       console.error("Ошибка при геокодировании адреса:", error);
     });
-
-    
 }
 
 //!
@@ -311,6 +310,9 @@ container.addEventListener("click", async (e) => {
       console.log(res.status);
       if (res.status === "success") {
         e.target.closest(".card").remove();
+        CARTS +=1
+        cartNav.innerHTML = `корзина<span class="text_cart">(${CARTS})</span>`;
+        //cartNav.innerText = `корзина(${CARTS})`
       } else {
         alert("что-то пошло не так");
       }
@@ -321,51 +323,51 @@ container.addEventListener("click", async (e) => {
   }
 });
 
-ymaps.ready(init);
+// ymaps.ready(init);
 
-function init(pointA, pointB) {
-  function addPlacemarkByAddressTwo(address) {
-    return ymaps
-      .geocode(address)
-      .then(function (res) {
-        const firstGeoObject = res.geoObjects.get(0);
-        if (firstGeoObject) {
-          const coordinates = firstGeoObject.geometry.getCoordinates();
-          return {
-            latitude: coordinates[0],
-            longitude: coordinates[1],
-          };
-        } else {
-          throw new Error("Адрес не найден");
-        }
-      })
-      .catch(function (error) {
-        console.error("Ошибка при геокодировании адреса:", error);
-        throw error;
-      });
-  }
+// function init(pointA, pointB) {
+//   function addPlacemarkByAddressTwo(address) {
+//     return ymaps
+//       .geocode(address)
+//       .then(function (res) {
+//         const firstGeoObject = res.geoObjects.get(0);
+//         if (firstGeoObject) {
+//           const coordinates = firstGeoObject.geometry.getCoordinates();
+//           return {
+//             latitude: coordinates[0],
+//             longitude: coordinates[1],
+//           };
+//         } else {
+//           throw new Error("Адрес не найден");
+//         }
+//       })
+//       .catch(function (error) {
+//         console.error("Ошибка при геокодировании адреса:", error);
+//         throw error;
+//       });
+//   }
 
-  // //Использование функции
-  // addPlacemarkByAddressTwo("город Тюмень, улица 50 лет октября, дом 1")
-  //   .then((coords) => {
-  //     console.log(
-  //       `Широта: 50лет ${coords.latitude}, Долгота: ${coords.longitude}`
-  //     );
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //   });
-  // // Coordinates of the points
-  // var pointA = [55.751244, 37.618423]; // Moscow
-  // var pointB = [59.93428, 30.335099]; // Saint Petersburg
+// //Использование функции
+// addPlacemarkByAddressTwo("город Тюмень, улица 50 лет октября, дом 1")
+//   .then((coords) => {
+//     console.log(
+//       `Широта: 50лет ${coords.latitude}, Долгота: ${coords.longitude}`
+//     );
+//   })
+//   .catch((error) => {
+//     console.error(error);
+//   });
+// // Coordinates of the points
+// var pointA = [55.751244, 37.618423]; // Moscow
+// var pointB = [59.93428, 30.335099]; // Saint Petersburg
 
-  // ymaps.route([pointA, pointB]).then(
-  //   function (route) {
-  //     let distance = route.getLength();
-  //     console.log("Distance between the points: " + distance + " meters");
-  //   },
-  //   function (error) {
-  //     console.log("An error occurred: " + error.message);
-  //   }
-  // );
-}
+// ymaps.route([pointA, pointB]).then(
+//   function (route) {
+//     let distance = route.getLength();
+//     console.log("Distance between the points: " + distance + " meters");
+//   },
+//   function (error) {
+//     console.log("An error occurred: " + error.message);
+//   }
+// );
+//}

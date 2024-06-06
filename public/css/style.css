@@ -4,8 +4,17 @@ button.navbar-toggler {
   margin: 10px;
 }
 
-nav.navbar.navbar-expand-lg.bg-light {
+body {
+  background-color: #9a8db5;
+}
+
+/* nav.navbar.navbar-expand-lg.bg-light {
   height: 140px;
+  background-color: blueviolet;
+} */
+
+.custom-navbar {
+  background-color: #b1afb6;
 }
 
 form {
@@ -13,6 +22,7 @@ form {
   margin: 22px;
   display: flex;
   flex-direction: column;
+
   input {
     margin-bottom: 12px;
   }
@@ -99,6 +109,7 @@ nav.navbar.navbar-expand-lg.bg-light {
   display: flex;
   flex-direction: row;
   gap: 20px;
+  background-color: #e1e1e2;
 }
 
 .card {
@@ -108,6 +119,7 @@ nav.navbar.navbar-expand-lg.bg-light {
   width: 250px;
   margin: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #e1e1e2;
 }
 
 .containerMinCart {
@@ -116,20 +128,27 @@ nav.navbar.navbar-expand-lg.bg-light {
 }
 
 .card-title {
-  font-size: 24px;
-  margin-bottom: 16px;
+  font-size: 17px;
+  margin-bottom: 8px;
 }
 .card-text {
   font-size: 13px;
-  margin-bottom: 16px;
-  line-height: 20px;
+  margin-bottom: 5px;
+  line-height: 18px;
 }
+
+.card-textCart {
+  font-size: 15px;
+  margin-bottom: 10px;
+  line-height: 18px;
+}
+
 .btn-add {
   display: inline-block;
   padding: 10px 20px;
   font-size: 11px;
   color: #fff;
-  background-color: #007bff;
+  background-color: #373756;
   border: none;
   border-radius: 4px;
   text-decoration: none;
@@ -175,6 +194,7 @@ nav.navbar.navbar-expand-lg.bg-light {
 
 .allCost {
   margin-top: 30px;
+  font-size: 25px;
 }
 
 .priceValue {
@@ -202,6 +222,12 @@ nav.navbar.navbar-expand-lg.bg-light {
 .mainContainerCart {
   padding-left: 30px;
   margin-top: 20px;
+  display: flex;
+}
+
+.elem2 {
+  padding-left: 130px;
+  /* padding-top: 100px;  */
 }
 
 .card-title {
@@ -209,80 +235,138 @@ nav.navbar.navbar-expand-lg.bg-light {
   text-align: center;
 }
 
+.card-titleCart {
+  font-size: 23px;
+  text-align: center;
+}
 
-  .form-group {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    align-items: center;
-  }
+.form-group {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
 
-  .form-control {
-    margin-bottom: 0;
-    min-width: 250px;
-  }
+.form-control {
+  margin-bottom: 0;
+  min-width: 250px;
+}
 
-  .horizontal-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: center;
-  }
+.horizontal-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
 
-  .btn {
-    margin-top: 0;
-  }
+.btn {
+  margin-top: 0;
+}
 
-  .orders-container {
-    display: flex;
-  }
+.orders-container {
+  display: flex;
+}
 
-  .clientOrdersContainer,
-  .courierOrdersContainer {
-    width: 49%;
-  }
+.clientOrdersContainer,
+.courierOrdersContainer {
+  width: 49%;
+}
 
-  .order-container {
-    position: relative;
-    width: 150px; 
-    height: 150px;
-    margin-bottom: 40px; 
-  }
+.order-container {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin-bottom: 40px;
+}
 
-  .orderCourier-pictures,
-  .orderClient-pictures {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 22px;
-    margin-left: 22px;
-  }
+.orderCourier-pictures,
+.orderClient-pictures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin-left: 22px;
+}
 
-  .locationDiv {
-    margin-left: 22px;  
-  }
+.locationDiv {
+  margin-left: 22px;
+}
 
-  .orderClient-image,
-  .orderCourier-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+.orderClient-image,
+.orderCourier-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-  .order-text {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 10px;
-    box-sizing: border-box;
-  }
+.order-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+  box-sizing: border-box;
+}
 
-  .delete,
-  .accept {
-    margin-top: 10px;
-    width: 100%;
-  }
-  
+.delete,
+.accept {
+  margin-top: 10px;
+  width: 100%;
+}
+.contPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh; /* Высота равная высоте видимой области браузера */
+}
+
+.contReg {
+  width: 400px; /* Ширина контейнера с формой регистрации */
+  padding: 20px; /* Отступы вокруг контейнера */
+  border: 1px solid #ccc; /* Граница контейнера */
+  border-radius: 10px; /* Закругление углов контейнера */
+  background-color: #fff; /* Фоновый цвет контейнера */
+}
+
+h3 {
+  text-align: center;
+  font-size: 1.5em;
+  margin: 10px 0;
+}
+
+hr {
+  width: 100%;
+  margin: 20px 0;
+}
+
+form {
+  width: 100%;
+}
+
+.form-label {
+  margin-top: 10px;
+}
+
+.form-control {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+button {
+  margin-top: 10px;
+}
+
+.btn-add:hover {
+  color: #999;
+}
+/* 
+.name {
+  font-weight: bold;
+} */
+
+.text_cart {
+  color: purple;
+  font-weight: bold;
+}

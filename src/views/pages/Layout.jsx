@@ -1,7 +1,13 @@
 const React = require("react");
 
 //* условная верстка для navBar
-module.exports = function Layout({ children, number, userName, userId }) {
+module.exports = function Layout({
+  children,
+  number,
+  userName,
+  userId,
+  orders,
+}) {
   return (
     <html lang="en">
       <head>
@@ -19,21 +25,23 @@ module.exports = function Layout({ children, number, userName, userId }) {
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
           crossOrigin="anonymous"
         />
-        <script src="https://api-maps.yandex.ru/2.1/?apikey=513313f4-6089-4a80-b442-af1d3277a73e&lang=ru_RU" type="text/javascript"></script>
+        <script
+          src="https://api-maps.yandex.ru/2.1/?apikey=513313f4-6089-4a80-b442-af1d3277a73e&lang=ru_RU"
+          type="text/javascript"
+        ></script>
         <link rel="stylesheet" href="/css/style.css" />
         <title>KuKu</title>
         <script
-
           src="https://api-maps.yandex.ru/2.1/?&amp;id=mymap&amp;lang=ru_RU&amp;apikey=513313f4-6089-4a80-b442-af1d3277a73e"
           type="text/javascript"
         ></script>
       </head>
       <header>
         {number ? (
-          <nav className="navbar navbar-expand-lg bg-light">
+          <nav className="navbar navbar-expand-lg custom-navbar">
             <div className="container-fluid">
               <span className="navbar-brand" href="/">
-                Hello, {userName}!
+                Hello, <span className="name">{userName}!</span>
               </span>
               <button
                 className="navbar-toggler"
@@ -54,11 +62,17 @@ module.exports = function Layout({ children, number, userName, userId }) {
                     </a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href={`/cart/${userId}`}>
-                      корзина
+                    <a className="nav-link cartNav" href={`/cart/${userId}`}>
+                      {orders.length === 0 ? (
+                        "корзина"
+                      ) : (
+                        <>
+                          корзина
+                          <span className="text_cart">({orders.length})</span>
+                        </>
+                      )}
                     </a>
                   </li>
-
                 </ul>
                 <ul className="navbar-nav ms-auto">
                   <li className="nav-item">
@@ -71,7 +85,7 @@ module.exports = function Layout({ children, number, userName, userId }) {
             </div>
           </nav>
         ) : (
-          <nav className="navbar navbar-expand-lg bg-light">
+          <nav className="navbar navbar-expand-lg custom-navbar">
             <div className="container-fluid">
               <a className="navbar-brand" href="/">
                 Home
