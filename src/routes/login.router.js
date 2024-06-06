@@ -10,29 +10,35 @@ loginRouter.get('/', (req, res) => {
   renderTemplate(Login, null, res);
 });
 
+
 loginRouter.post('/', async (req, res) => {
   try {
-    const { login, password } = req.body;
-    const user = await User.findOne({ where: { login } });
+    const { name, password, number } = req.body;
+    const user = await User.findOne({ where: { number } });
+   
     if (!user) {
-      console.log(`user not found`);
-      res.redirect('/register');
+      console.log(`user not found user`);
+      res.json({ message: `not found` });
     } else {
       const checkPass = await bcrypt.compare(password, user.password);
       if (checkPass) {
-        req.session.login = user.login;
+        req.session.number = user.number; 
+        req.session.userId = user.id;
+        req.session.userName = user.name;
+        req.session.isCourier = user.isCourier;
         req.session.save(() => {
+          //const { id } = user
           console.log('Password correct. Session saved');
-          res.redirect('/');
+          res.json({ message: `found`});
         });
       } else {
         console.log('Wrong password');
-        res.redirect('/login');
-        // res.json({ passErr: `Password is incorrect`}) //* для fetch-a
+        res.json({ message: `Password is incorrect` });
       }
     }
   } catch (error) {
-    console.log(`loginRouter.post =>`, error);
+    console.log(`loginRouter.error =>`, error);
+    res.redirect("/api/farm");   //! 
   }
 });
 

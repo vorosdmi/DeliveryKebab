@@ -15,40 +15,49 @@ module.exports = {
       url: {
         type: Sequelize.STRING
       },
-      firstprice: {
+      price: {
         type: Sequelize.INTEGER
       },
-      skidka: {
+      discount: {
         type: Sequelize.INTEGER
       },
-      place: {
+      clientId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+        onDelete: 'cascade',
+      },
+      clientAddress: {
         type: Sequelize.STRING
       },
-      userId: {
+      courierId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Users',
           key: 'id',
         },
         onDelete: 'cascade',
-        allowNull: false,
       },
-      curierId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
-          key: 'id',
-        },
-        onDelete: 'cascade',
-        allowNull: false,
+      courierAddress: {
+        type: Sequelize.STRING
+      },
+      isAccepted: {
+        type: Sequelize.BOOLEAN
+      },
+      isReady: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW')
       }
     });
   },

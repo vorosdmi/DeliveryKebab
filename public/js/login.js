@@ -1,4 +1,5 @@
-const form = document.querySelector("#regForm");
+const form = document.querySelector("#loginForm");
+
 
 const normalizePhoneNumber = (number) => {
   // Регулярное выражение для проверки допустимых форматов
@@ -25,34 +26,22 @@ const normalizePhoneNumber = (number) => {
   return false;
 };
 
-//console.log(normalizePhoneNumber("08-982-982-22-22"));
 
-//! валидные номера
-// const phoneNumbers = [
-//   "+79829822222",
-//   "89829822222",
-//   "+7 982 982 22 22",
-//   "+7-982-982-22-22",
-//   "8 982 982 22 22",
-//   "8-982-982-22-22"
-// ];
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-
   const data = new FormData(form);
   const res = Object.fromEntries(data);
   console.log(res);
-  if (!res.name || !res.password || !res.number) {
-    alert("Input your name, phone number and password");
+  if (!res.password || !res.number) {
+    alert('Input your name, phone number and password');
   }
   if (!normalizePhoneNumber(res.number)) {
     alert('Input correct your phone number');
-  }
-  else {
+  } else {
     try {
-      res.number=normalizePhoneNumber(res.number)
-      const response = await fetch("/register", {
+      res.number = normalizePhoneNumber(res.number)
+      const response = await fetch("/login", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -60,17 +49,23 @@ form.addEventListener("submit", async (e) => {
         body: JSON.stringify(res),
       });
       const result = await response.json();
-      console.log(result);
+console.log(result);
 
-      result.regErr / result.regDone;
-      if (result.regDone) {
+      if (result.message === "found") {
         setTimeout(() => {
-          window.location.href = "/";
+          window.location.href = `/`;
         }, 250);
       }
-      if (result.regErr) {
-        const errMsg = document.querySelector(".regErrMsg");
-        errMsg.innerText = result.regErr;
+
+      if (result.message === "not found") {
+        const errMsg = document.querySelector(".loginErr");
+        errMsg.innerText = result.message;
+        errMsg.style.color = "red";
+      }
+
+      if (result.message === "Password is incorrect") {
+        const errMsg = document.querySelector(".loginErr");
+        errMsg.innerText = result.message;
         errMsg.style.color = "red";
       }
     } catch (error) {

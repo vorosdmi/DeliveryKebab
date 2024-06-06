@@ -15,7 +15,7 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
-      curier: {
+      isCourier: {
         type: Sequelize.BOOLEAN
       },
       number: {
@@ -23,6 +23,10 @@ module.exports = {
         unique: true,
         allowNull: false,
       },
+      email: {
+        type: Sequelize.STRING,
+      },
+      
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
