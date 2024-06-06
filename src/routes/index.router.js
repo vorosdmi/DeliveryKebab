@@ -17,12 +17,13 @@ indexRouter.get("/", async (req, res) => {
     const orders = await Order.findAll({ where: { isAccepted: false } });
     const ordersRes = orders.map((el) => el.get({ plain: true }));
     const ordersRes2 = ordersRes.filter((el) => !(el.clientId === userId));
+    const ordersCart = ordersRes.filter((el) => (el.clientId === userId));
     
     const user = await User.findByPk(userId);
     if (user.isCourier) {
       res.redirect('/orders/courier')
     } else {
-      renderTemplate(Home, { number, userName, userId, orders: ordersRes2 }, res);
+      renderTemplate(Home, { number, userName, userId, orders: ordersRes2, ordersCart }, res);
     }
   } else {
     const orders = await Order.findAll({ where: { isAccepted: false } });
@@ -98,8 +99,7 @@ indexRouter.patch("/cart/:orderId", async (req, res) => {
 //? оформляем заказ
 
 
-
-indexRouter.patch("/cart/allarders/:userId", async (req, res) => {
+indexRouter.patch("/cart/allorders/:userId", async (req, res) => {
   const { userId } = req.params;
   const { userName, number } = req.session; // Предполагается, что эти данные хранятся в сессии
   console.log("*********** ", userId);
@@ -108,40 +108,41 @@ indexRouter.patch("/cart/allarders/:userId", async (req, res) => {
     // Обновляем заказы
     console.log("*");
     const orders = await Order.findAll({ where: { clientId: userId } });
+
     console.log("ORDERSSS ", orders);
     if (!orders || orders.length === 0) {
-      return res
-        .status(404)
-        .json({ status: "error", message: "Заказы не найдены" });
+      return res.status(404).json({ status: "error", message: "Заказы не найдены" });
     }
 
     for (let el of orders) {
       el.isAccepted = true;
       await el.save();
+
+      // Настраиваем транспортер для отправки email
+      const transporter = nodemailer.createTransport({
+        host: "smtp.mail.ru",
+        port: 465,
+        secure: true,
+        auth: {
+          user: "chectb@mail.ru",
+          pass: "x2V9PHZRGh0hx5zfcsEe",
+        },
+      });
+
+      const courier = await User.findOne({ where: { id: el.courierId }});
+
+      await transporter.sendMail({
+        from: "chectb@mail.ru",
+        to: courier.email,
+        subject: `Заказ от пользователя ${userName}`,
+        text: `Имя: ${userName}\nТелефон: ${number}\nID пользователя: ${userId}`,
+        html: `
+          <p><strong>Имя:</strong> ${userName}</p>
+          <p><strong>Телефон:</strong> ${number}</p>
+          <p><strong>ID пользователя:</strong> ${userId}</p>
+        `,
+      });
     }
-
-    // Настраиваем транспортер для отправки email
-    const transporter = nodemailer.createTransport({
-      host: "smtp.mail.ru",
-      port: 465,
-      secure: true,
-      auth: {
-        user: "chectb@mail.ru",
-        pass: "x2V9PHZRGh0hx5zfcsEe",
-      },
-    });
-
-    await transporter.sendMail({
-      from: "chectb@mail.ru",
-      to: "chectb@mail.ru",
-      subject: `Заказ от пользователя ${userName}`,
-      text: `Имя: ${userName}\nТелефон: ${number}\nID пользователя: ${userId}`,
-      html: `
-        <p><strong>Имя:</strong> ${userName}</p>
-        <p><strong>Телефон:</strong> ${number}</p>
-        <p><strong>ID пользователя:</strong> ${userId}</p>
-      `,
-    });
 
     res.json({
       status: "success",
@@ -149,14 +150,13 @@ indexRouter.patch("/cart/allarders/:userId", async (req, res) => {
     });
   } catch (err) {
     console.log(`Ошибка в taskRouter.patch(${userId}) ====>>>>`, err);
-    res
-      .status(500)
-      .json({
-        error: "Ошибка при обновлении заказов или отправке уведомления",
-      });
+    res.status(500).json({
+      error: "Ошибка при обновлении заказов или отправке уведомления",
+    });
   }
 });
 
+    
 indexRouter.get("/logout", (req, res) => {
   req.session.destroy(() => {
     res.clearCookie("cookieName");

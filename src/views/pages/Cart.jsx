@@ -6,13 +6,14 @@ module.exports = function Cart({ number, userName, userId, orders, user }) {
     (ac, el) => ac + (el.price - (el.price * el.discount) / 100),
     0
   );
-  
+  console.log("CART", orders.length);
   return (
-    <Layout number={number} userName={userName}>
-<div className="mainContainerCart">
+    <Layout number={number} userName={userName} orders={orders}>
       <h3>Корзина</h3>
+<div className="mainContainerCart" data-ordercards={JSON.stringify(orders)}>
+      
 
-      <div className="containerAllCart">
+      <div className="containerAllCart elem1">
         {orders.map((order) => (
           <div className="cardCart" key={order.id}>
             <img
@@ -24,8 +25,8 @@ module.exports = function Cart({ number, userName, userId, orders, user }) {
             /> 
             
             <div className="containerMinCart">
-            <h6 className="card-title">{order.name}</h6>
-            <h6 className="card-text">
+            <h6 className="card-titleCart">{order.name}</h6>
+            <h6 className="card-textCart">
               Цена отвара:{" "}
               {Number(order.price) -
                 (Number(order.price) * Number(order.discount)) / 100}
@@ -47,6 +48,8 @@ module.exports = function Cart({ number, userName, userId, orders, user }) {
           </div>
         ))}
       </div>
+
+      <div className="elem2">
       {orders.length === 0 ? (
         <h5>В вашей корзине пусто...</h5>
       ) : (
@@ -61,6 +64,8 @@ module.exports = function Cart({ number, userName, userId, orders, user }) {
       >
         оформить заказ
       </button>
+      </div>
+
       </div>
       <script src="/js/cart.js"></script>
     </Layout>
