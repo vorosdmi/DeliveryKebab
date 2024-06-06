@@ -5,8 +5,10 @@ const Layout = require("./Layout");
 module.exports = function Login() {
   return (
     <Layout>
-     
-      <h3 className="hTag">Пожалуйста, введите ваш <br />номер телефона и пароль</h3>
+      <h3 className="hTag">
+        Пожалуйста, введите ваш <br />
+        номер телефона и пароль
+      </h3>
       <hr />
       <form action="/login" method="POST" id="loginForm">
         <label htmlFor="exampleInput1" className="form-label">
@@ -16,6 +18,7 @@ module.exports = function Login() {
           name="number"
           type="text"
           className="form-control shadow rounded"
+          placeholder="* 8/+7-XXX-XXX-XX-XX"
           id="exampleInput1"
         />
         {/* placeholder="example@yahooooo.com" к примеру можно что-то тип того, если будете regExp на email@email делать */}

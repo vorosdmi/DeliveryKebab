@@ -9,6 +9,8 @@ const Home = require('./src/views/pages/Home');
 const path = require('path');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
+const nodemailer = require('nodemailer')
+
 
 const indexRouter = require('./src/routes/index.router');
 const loginRouter = require('./src/routes/login.router');
@@ -42,11 +44,9 @@ app.use('/login', secureRoute, loginRouter);
 app.use('/register', secureRoute, regRouter);
 app.use('/', indexRouter);
 app.use('/orders', orderRouter);
+// app.use('/cart/allarders/:userId', indexRouter);
 
-// app.get('/*', (req, res) => {
-//   // res.status(404).send('404');
-//   res.redirect('/');
-// });
+
 
 app.listen(PORT, () => {
   console.log(`Сервак крутится на порту ${PORT}!`);

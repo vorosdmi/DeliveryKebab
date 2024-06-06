@@ -9,8 +9,8 @@ module.exports = function Courier({ number, courierOrders, clientOrders }) {
     <Layout number={number}>
       <NewOrder />
       <div className="orders-container">
-        <CourierOrders orders={courierOrders}/>
-        <ClientOrders orders={clientOrders}/>
+        <CourierOrders orders={courierOrders} />
+        <ClientOrders orders={clientOrders} />
       </div>
       <script type="module" src="/js/newCourierOrder.js"></script>
       <script src="/js/changeCourierOrder.js"></script>

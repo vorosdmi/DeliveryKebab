@@ -1,40 +1,214 @@
 button.navbar-toggler {
-    position: fixed;
-    right: 0;
-    margin: 10px;
-  }
-  
-  nav.navbar.navbar-expand-lg.bg-light{
-   height: 50px;
-  }
-  
-  form {
-    max-width: 300px;
-    margin: 22px;
-    display: flex;
-    flex-direction: column;
-    input {
-      margin-bottom: 12px;
-    }
-    button {
-      margin-top: 16px;
-    }
-  }
-  
-  header {
+  position: fixed;
+  right: 0;
+  margin: 10px;
+}
+
+nav.navbar.navbar-expand-lg.bg-light {
+  height: 140px;
+}
+
+form {
+  max-width: 300px;
+  margin: 22px;
+  display: flex;
+  flex-direction: column;
+  input {
     margin-bottom: 12px;
   }
-  
-  h1,h2,h3,h4,h5 {
-    margin-left: 22px;
-    margin-right: 22px;
+  button {
+    margin-top: 16px;
   }
+}
 
-  .map {
-    border: 2px solid purple;
-    width: 300px;
-    height: 150px;
-  }
+header {
+  margin-bottom: 12px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin-left: 22px;
+  margin-right: 22px;
+}
+
+.map {
+  border: 2px solid purple;
+  width: 600px;
+  height: 300px;
+  /* flex-grow: 1; Карта занимает все доступное место */
+}
+
+.elementHiddn {
+  display: none;
+}
+
+nav.navbar.navbar-expand-lg.bg-light {
+  height: 60px;
+}
+
+.logout {
+  align-self: self-end;
+}
+
+.containerMap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Выравнивание по вертикали (если необходимо) */
+  align-items: center; /* Выравнивание по горизонтали */
+  text-align: center; /* Центрирование текста внутри элементов */
+  margin: 40px 40px 40px 0;
+  gap: 20px;
+}
+
+.containerMinMap {
+  display: flex;
+  align-items: center; /* Вертикальное выравнивание */
+  justify-content: flex-start; /* Горизонтальное распределение */
+  margin: 50px 100px;
+  gap: 100px;
+}
+
+.text-map {
+  align-self: center; /* Выравнивание текста по вертикали */
+  padding: 20px; /* Отступы вокруг текста */
+  max-width: 300px; /* Максимальная ширина текста */
+  text-align: center;
+}
+
+.containerAll {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.containerAllCart {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.cardCart {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  width: 350px;
+  margin: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  width: 250px;
+  margin: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.containerMinCart {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+.card-text {
+  font-size: 13px;
+  margin-bottom: 16px;
+  line-height: 20px;
+}
+.btn-add {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 12px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.placeOrder {
+  background-color: purple; /* Зеленый цвет фона */
+  color: #fff; /* Белый цвет текста */
+  border: none; /* Убираем границу */
+  border-radius: 8px; /* Скругленные углы */
+  padding: 7px 15px; /* Внутренние отступы */
+  font-size: 12px; /* Размер шрифта */
+  font-weight: bold; /* Жирный текст */
+  text-align: center; /* Центрирование текста */
+  cursor: pointer; /* Курсор в виде руки при наведении */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Плавный переход для фона и трансформации */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень */
+  margin: 30px;
+}
+
+.placeOrder:hover {
+  background-color: rgb(
+    156,
+    19,
+    156
+  ); /* Темно-зеленый цвет фона при наведении */
+  transform: translateY(-2px); /* Легкий подъем кнопки при наведении */
+}
+
+.placeOrder:active {
+  background-color: rgb(97, 13, 97); /* Еще темнее при клике */
+  transform: translateY(
+    0
+  ); /* Кнопка возвращается в исходное положение при клике */
+}
+
+.placeOrder:focus {
+  outline: none; /* Убираем обводку */
+  box-shadow: 0 0 0 3px rgb(88, 1, 88); /* Добавляем фокусное кольцо */
+}
+
+.allCost {
+  margin-top: 30px;
+}
+
+.priceValue {
+  font-weight: bold; /* Делаем текст жирным */
+}
+
+.btn-del {
+  display: inline-block;
+  width: 20px; /* Ширина кнопки */
+  height: 20px; /* Высота кнопки */
+  border-radius: 50%; /* Радиус скругления, чтобы сделать кнопку круглой */
+  background-color: #ccc; /* Цвет фона - светло-серый */
+  color: #fff; /* Цвет текста - белый */
+  text-align: center; /* Выравнивание текста по центру */
+  line-height: 20px; /* Центрирование текста по вертикали */
+  font-size: 13px; /* Размер шрифта */
+  text-decoration: none; /* Убираем подчеркивание */
+}
+
+.btn-del:hover {
+  background-color: #999; /* Изменяем цвет фона при наведении */
+  color: white;
+}
+
+.mainContainerCart {
+  padding-left: 30px;
+  margin-top: 20px;
+}
+
+.card-title {
+  font-size: 20px;
+  text-align: center;
+}
+
 
   .form-group {
     display: flex;
