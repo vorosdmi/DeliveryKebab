@@ -1,6 +1,7 @@
 const React = require("react");
 const Layout = require("./Layout");
 const Card = require("../components/Card");
+//const getLocation = require('../../../public/js/test')
 
 module.exports = function Home({ number, userName, userId, orders }) {
  //? имеющиеся адреса для меток
@@ -11,7 +12,8 @@ module.exports = function Home({ number, userName, userId, orders }) {
 
   return (
     <Layout number={number} userName={userName} userId={userId}>
-      <div className="containerMap" data-addresses={courierAddresses}>
+      <div className="containerMap" data-addresses={courierAddresses} data-number={number} data-userid={userId}>
+      {/* <div className="containerMap" data-addresses={JSON.stringify(orders)}> */}
         <h4>Добро пожаловать в Деливери кебаб!</h4>
         <h6>
           Здесь вы можете выбрать и оформить себе заказ из указанного списка
@@ -27,8 +29,8 @@ module.exports = function Home({ number, userName, userId, orders }) {
         </div>
       </div>
 
-      <div className="containerAll">
-        {orders.map((order) => (
+      <div className="containerAll" data-allorders={JSON.stringify(orders)}>
+        {/* {orders.map((order) => (
           <div className="card" key={order.id}>
             <div className="card-title">{order.name}</div>
 
@@ -54,16 +56,22 @@ module.exports = function Home({ number, userName, userId, orders }) {
               href="#"
               className={number ? "btn-add" : "elementHiddn"}
               data-location=""
+              data-odrerlocation=""
+              data-courierlocation={order.courierAddress}
               data-orderid={order.id}
               data-userid={userId}
             >
               добавить в корзину
             </a>
           </div>
-        ))}
+        ))} */}
       </div>
 
       <script src="/js/home.js"></script>
     </Layout>
   );
 };
+
+
+
+

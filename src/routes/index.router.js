@@ -27,7 +27,7 @@ indexRouter.get("/", async (req, res) => {
   } else {
     const orders = await Order.findAll({ where: { isAccepted: false } });
     const ordersRes = orders.map((el) => el.get({ plain: true }));
-    //const ordersAddress = 
+
     console.log(ordersRes);
     renderTemplate(Home, { orders: ordersRes }, res);
   }
