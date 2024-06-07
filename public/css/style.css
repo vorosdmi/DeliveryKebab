@@ -416,6 +416,6 @@ button {
 }
 
 .highlight {
-  background-color: #d9534f;
-  color: white; /* Цвет текста будет белым, чтобы он был виден на фоне */
+  color: #d9534f;
+  /* color: white;  */
 }
