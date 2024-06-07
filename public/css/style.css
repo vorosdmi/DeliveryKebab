@@ -1,6 +1,7 @@
 body {
   font-family: 'Comfortaa', sans-serif;
   margin-top: 80px;
+  /* background-color:#e1e1e2; */
 }
 
 button.navbar-toggler {
@@ -114,7 +115,7 @@ nav.navbar.navbar-expand-lg.bg-light {
 
 .card-img-topp {
   width: 150px;
-  height: 150px;
+  /* height: 150px; */
   object-fit: cover;
   border-radius: 8px;
   margin-right: 16px;
@@ -413,4 +414,14 @@ button {
 .containerAll {
   height: 70vh;
   overflow-y: auto; /* Добавляем вертикальную прокрутку */
+}
+
+.highlight {
+  color: #d9534f;
+  /* color: white;  */
+}
+
+.text_cart {
+  color: purple;
+  font-weight: bold;
 }
