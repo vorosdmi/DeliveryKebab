@@ -5,10 +5,14 @@ const addresses = addressesArr.split(";");
 addresses.pop();
 const userId = elementAddresses.dataset.userid;
 const number = elementAddresses.dataset.number;
+let ordersCarts = '';
+let CARTS = 0;
 if (number) {
-  const ordersCarts = elementAddresses.dataset.ordercards; 
-  let CARTS = JSON.parse(ordersCarts).length;
+  ordersCarts = elementAddresses.dataset.ordercards; 
+  console.log('1!!!', ordersCarts); 
+  CARTS = JSON.parse(ordersCarts).length;
 }
+console.log('2!!!', CARTS);
 const cartNav = document.querySelector('.cartNav')
 
 const allOrders = container.dataset.allorders;
@@ -222,6 +226,7 @@ container.addEventListener("click", async (e) => {
       if (res.status === "success") {
         e.target.closest(".card").remove();
         CARTS +=1
+        console.log('>>>>', CARTS);
         cartNav.innerHTML = `корзина<span class="text_cart">(${CARTS})</span>`;
         //cartNav.innerText = `корзина(${CARTS})`
       } else {

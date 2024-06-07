@@ -2,7 +2,7 @@ const container = document.querySelector(".containerAllCart");
 const btn = document.querySelector(".placeOrder");
 const allCost = document.querySelector(".allCost");
 let dataAllPrice = allCost.dataset.allprice;
-console.log(dataAllPrice);
+// console.log(dataAllPrice);
 const cartNav = document.querySelector('.cartNav')
 
 const mainContainerCart = document.querySelector('.mainContainerCart')
@@ -39,6 +39,7 @@ container.addEventListener("click", async (e) => {
           btn.classList.remove("placeOrder"); 
           btn.classList.add("elementHiddn"); 
           cartNav.innerHTML = `корзина`;
+          allCost.innerText = `В вашей корзине пусто...`
         }
       } else {
         alert("что-то пошло не так");
@@ -69,6 +70,9 @@ btn.addEventListener("click", async (e) => {
     console.log(res.status);
     if (res.status === "success") {
       container.remove();
+      btn.classList.remove('placeOrder');
+      btn.classList.add('elementHiddn');
+      cartNav.innerHTML = `корзина`;
       allCost.innerText = "В вашей корзине пусто...";
     } else {
       alert("что-то пошло не так");

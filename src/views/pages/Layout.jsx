@@ -91,7 +91,7 @@ module.exports = function Layout({
             </div>
           </nav>
         ) : (
-          <nav className="navbar navbar-expand-lg bg-light fixed-top">
+          <nav className="navbar navbar-expand-lg custom-navbar fixed-top">
             <div className="container-fluid">
               <a className="navbar-brand" href="/">
                 Home
